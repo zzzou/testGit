@@ -1,0 +1,175 @@
+
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+<!-- 三方库 -->
+<script type="text/javascript" src="./js/flexpaper/flexpaper.js"></script>
+<script type="text/javascript" src="./js/flexpaper/flexpaper_handlers.js"></script>
+
+<!-- 页面 -->
+<script type="text/javascript" src="js/proposition/situation_slip.js" ></script>
+<script type="text/javascript" src="js/scaleLibrary/assessmentTasksIndex.js" ></script>
+<script type="text/javascript" src="js/view_office.js" ></script>
+<!-- 弹出层-->
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+<style type="text/css">
+
+#tab03 { width:30px;height:100px; margin-top:50px; }
+
+#tab03 h3 { position:relative; z-index:1;  padding-top:4px; margin-bottom:3px; border:solid #ccc; border-width:1px 0 1px 1px; text-align:center; font-family:宋体; background:#E0E0E0; cursor:pointer; }
+
+.fancybox-skin{
+    background-color:#B8B8B8!important;
+}
+
+</style>
+
+<!--右部展示界面-->
+<div class="cont_box fr">
+    <h3>评测任务</h3>
+    <div class="ceprw_cont">
+        <ul>
+            <li class="ceprw_li_on" id="jinx1">正在进行</li>
+            <li class="ceprw_li" id="jinx2">已完结</li>
+            <div class="clear"></div>
+        </ul>
+        <div id="jinx_cont1">
+             <!--循环展示开始-->
+             <{foreach item=proposition from=$publicAssementTasks}>
+                <{if $proposition.state==1}>
+                    <div class="cprw_li">
+                        <span class="ce_p_bg fl"><{$proposition.name}>
+                            <h6>
+                                <a href="#" class="fr" id="js4" onclick="$(this).parents('.cprw_li').next('.cprw_tcin').toggle();return false;">详细</a>
+                                发布日期：<{$proposition.state_time|date_format:'%Y-%m-%d'}>
+                            </h6>
+                        </span>
+                        <div class="fl width_cpico">
+                            <ol>
+                                <li>发布测评任务</li>
+                                <li>测评</li>
+                                <li>阅卷</li>
+                                <li>生成报告</li>
+                                <div class="clear"></div>
+                            </ol>
+                            <ol class="ico_cp">
+                                 <{if $proposition.state>=1}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=2}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=3}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=4}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                            </ol>
+                            <ol class="time_cp">
+                                <li><{$proposition.state_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                            </ol>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="cprw_tcin" style="display:none;">
+                        <div class="sanjix"></div>
+                        <span onclick="$(this).parent().hide();return false;" class="close_ico"></span>
+                        <dl>
+                            <dt><{$proposition.name}></dt>
+                            <dd>测评维度： <{$proposition.assessment_wd}></dd>
+                            <dd>测评指标： <{$proposition.assessment_zb}></dd>
+                            <dd>测评对象：<{$proposition.assessment_obj}></dd>
+                            <dd>使用量表：
+                                <b><{$proposition.test_num}></b><{$proposition.scale_name}>
+                                <a class="viewScale" href="#demo"
+                                    onclick="view_office('<{$proposition.scale_url}>','0','<{$proposition.scale_name}>','<{$proposition.test_num}>','<{$proposition.scale_anw_url}>')">查看量表</a>
+                                <a href="./resource/doc/<{$proposition.scale_name}>.doc">下载量表</a>
+                            </dd>
+                        </dl>
+
+                    </div>
+
+                <{/if}>
+             <{/foreach}>
+
+        </div>
+        <!--循环展示结束-->
+        <div id="jinx_cont2" style="display:none;">
+           <{foreach item=proposition from=$publicAssementTasks}>
+               <{if $proposition.state>1}>
+                   <div class="cprw_li" >
+                        <span class="ce_p_bg fl"><{$proposition.name}>
+                            <h6>
+                                <a href="#" class="fr" id="js4" onclick="$(this).parents('.cprw_li').next('.cprw_tcin').toggle();return false;">
+                                详细</a>发布日期：<{$proposition.state_time|date_format:'%Y-%m-%d'}>
+                            </h6>
+                        </span>
+                        <div class="fl clearfix">
+                            <ol>
+                                <li>发布测评任务</li>
+                                <li>测评</li>
+                                <li>阅卷</li>
+                                <li>生成报告</li>
+                                <div class="clear"></div>
+                            </ol>
+
+                            <ol class="ico_cp">
+                                 <{if $proposition.state>=1}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=2}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=3}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                 <{if $proposition.state>=4}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                            </ol>
+
+                            <ol class="time_cp">
+                                 <li><{$proposition.state_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                 <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                 <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                 <li><{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                            </ol>
+                        </div>
+                        <div class="clear"></div>
+                   </div>
+
+                   <div class="cprw_tcin" style="display:none;" >
+                        <div class="sanjix"></div>
+                        <span onclick="$(this).parent().hide();return false;" class="close_ico"></span>
+                        <dl>
+                            <dt><{$proposition.name}></dt>
+                            <dd>测评时间：<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></dd>
+                            <dd>测评维度： <{$proposition.assessment_wd}></dd>
+                            <dd>测评指标： <{$proposition.assessment_zb}></dd>
+                            <dd>测评对象：<{$proposition.assessment_obj}></dd>
+                            <dd>使用量表：<{$proposition.scale_num}><{$proposition.scale_name}>
+                            <a class="viewScale" href="#demo" onclick="view_office1('<{$proposition.scale_url}>','0','<{$proposition.scale_name}>','<{$proposition.scale_anw_url}>')">查看量表</a>
+                            <a href="./resource/doc/<{$proposition.scale_name}>.doc')" >下载量表</a></dd>
+                        </dl>
+                   </div>
+
+               <{/if}>
+           <{/foreach}>
+           <!--循环展示结束-->
+        </div>
+    </div>
+</div>
+<!--弹出层-->
+<div id="demo" style="display:none;width:1000px;height:100px;">
+    <div id="tab01" style="padding-left:110px;padding-top:30px;padding-bottom:30px;font-size:30px"></div>
+    <div id="tab03" style="float:left;padding-left:80px;font-size:15px">
+</div>
+<div id="preview" style="float:left;width:80%;"></div>
+</div>
+    <!--弹出层结束-->
+    <div class="clear"></div>
+    <div class="clear"></div>
+</div>

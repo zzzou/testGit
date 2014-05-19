@@ -1,0 +1,333 @@
+<link rel="stylesheet" href="css/topic_base.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/Testlibrary.css" type="text/css" media="all" />
+<link id='azb_theme' rel='stylesheet' href='css/skin_green.css' type='text/css'/>
+<link rel="stylesheet" href="jquery-ui.min.css" type="text/css" media="all" />
+ <script type="text/javascript" src="./js/jquery/jquery-ui.min.js" ></script>
+<style type="text/css">
+.shine { background-color: #bbebd3; }
+.checkRptRContent 
+{
+width: 1650px;
+}
+/*因为clear样式冲突。。所有解决 */
+.control-box a span{
+	display: inline;
+	font-size: 10px;
+	visibility: visible;
+}
+
+.paper-list a.icon {
+margin-right: 0px;
+}
+
+.epd_main {
+width: 1200px;
+}
+</style>
+
+
+<div class="fn-right fn_white" id="exam_tabs"  style="height: 630px;">
+    <div class="fn-left_content" style="width: 185px; background-color: rgb(242, 242, 242); height: 630px; 
+                                        background-position: initial initial; background-repeat: initial initial;">
+	      <div class="fn-left_content_wrapper" style="height: 600px;">
+	        <div class="border_jiegou">
+	            <select name="structure">
+	                <option value="">默认结构</option>
+	                <option value="static">标准结构</option>
+	                <option value="test">测验结构</option>
+	                <option value="homework">作业结构</option>
+	            </select>
+	        </div>
+	        <div class="paper-list-container" style="height: 500px;">
+	                  <ul class="paper-list">
+	                    <li class="part-title">卷头</li>
+	                    <{foreach item =item from = $paperHeader}>
+	                    <li class="fn-clear" data-test="1" data-homework="1" data-id="<{$item.Id}>">
+	                        <{if $item.IsShow eq '1'}>
+	                        <a href="javascript:void(0)" class="icon check"></a>
+	                        <{/if}>
+	                        <{if $item.IsShow eq '0'}>
+	                        <a href="javascript:void(0)" class="icon uncheck"></a>
+	                        <{/if}>
+	                        <a href="javascript:void(0)" class="icon set"></a>
+	                        <a href="javascript:void(0)" class="menu-item-title" 
+	                        onclick="javascript:gotoContentTitle('<{$item.Id}>');return false;"><{$item.CateTitle}></a>
+	                    </li>
+	                    <{/foreach}>	                  
+	                  </ul>
+	                 <ul class="paper-list">
+	                    <li class="part-title">卷体</li>
+	                     <{foreach item=item from=$paperContent}>
+	                    <li data-id="7hkmasmjrlnjwxvgtupunq">
+	                         <div class="list-title" data-static="1" data-id="<{$item.Id}>">
+	                             <a href="javascript:void(0)" class="icon check"></a><a href="javascript:void(0)" class="icon set"></a>
+	                             <a href="javascript:void(0)" class="menu-item-title" 
+	                             onclick="javascript:gotoContentTitle('<{$item.Id}>');return false;"><{$item.Title}></a>
+	                         </div>
+	                         <ul class="child-list">
+	                             <li>  
+	                            <{foreach item=item2 from=$item.two}>
+	                              <div class="list-title" data-static="1" data-test="1" data-id="<{$item2.Id}>">
+	                                     <a href="javascript:void(0)" class="icon check"></a>
+	                                     <a href="javascript:void(0)" class="icon set"></a>
+	                                     <a href="javascript:void(0)" class="menu-item-title" 
+	                                     onclick="javascript:gotoContentTitle('<{$item2.Id}>');return false;">
+	                                         <span class="menu-questiontype-nu"><{$item2.hanzi}></span>
+	                                         <span><{$item2.Title}></span>
+	                                     </a>
+	                              </div>                              
+	                               <{foreach item=item3 from=$item2.list}>
+	                                 <ul class="question-box">                                  
+	                                        <li class="question-item" 
+	                                        onclick="javascript:gotoContentTitle('<{$item3.Id}>');return false;">
+	                                        <span class="list-order"><{$item3.SortOrder}></span>.
+	                                            <{$item3.PaperTitle}>
+	                                        </li>	                                
+	                                 </ul>
+	                                  <{/foreach}>
+	                              <{/foreach}>
+	                              </li>
+	                         </ul>
+	                     </li>
+	                         <{/foreach}>
+	                   </ul>
+	            </div>
+	      </div>
+    </div>
+
+   <form id="form_list" style="width: 1020px;">
+    <div class="fn-right_content" style="margin-left: 175px; height: 630px;">
+      <div class="wrapper_zujuan" >
+            <div class="shitidatilan" >
+                <h3>试卷预览</h3>
+                <div class="download">
+                    <div class="down">
+                        <a href="#" class="xiazai" id="exam_dowmload">下载</a>
+                        <a href="#" class="datika" id="datika_dowmload">答题卡</a>
+                                                <a href="#" id="saveExampaper" class="cundang">存档</a>
+                    </div>
+                </div>
+            </div>
+	     <div class="really_library" style="margin-top: 35px;">
+	         <div id="pui_seal" data-id="<{$paperHeader[2].Id}>" style=" display: none; ">
+	             <a class="unit-box separate-line" id="separate-line" title="设置"></a>
+	         </div>	         
+	         <{if $paperHeader[3].IsShow =="1"}>
+	         <div class="unit-box secret-mark" id="secret-mark" data-id="<{$paperHeader[3].Id}>" 
+	         style="display: none;  font-size: 14px;"><{$paperHeader[3].Title}></div>
+	         <{/if}>
+	         <{if $paperHeader[3].IsShow !="1"}>
+	         <div class="unit-box secret-mark" id="secret-mark" data-id="<{$paperHeader[3].Id}>" 
+	         style=" font-size: 14px;"><{$paperHeader[3].Title}></div>
+	         <{/if}>
+	         <{if $paperHeader[0].IsShow =="1"}>
+	         <div class="paper-title" data-id="<{$paperHeader[0].Id}>" style=" display: block; "><{$paperHeader[0].Title}></div>
+	         <{/if}>
+	         <{if $paperHeader[0].IsShow !="1"}>
+	         <div class="paper-title" data-id="<{$paperHeader[0].Id}>" style=" display: none; "><{$paperHeader[0].Title}></div>
+	         <{/if}>
+	         <{if $paperHeader[1].IsShow =="1"}>
+	         <div class="paper-prititle" data-id="<{$paperHeader[1].Id}>" style="display: block;"><{$paperHeader[1].Title}></div>
+	          <{/if}>
+	           <{if $paperHeader[1].IsShow !="1"}>
+	         <div class="paper-prititle" data-id="<{$paperHeader[1].Id}>" style="display: none;"><{$paperHeader[1].Title}></div>
+	          <{/if}>
+	           <{if $paperHeader[4].IsShow =="1"}>
+	         <div class="paper-info" data-id="<{$paperHeader[4].Id}>" style=" display: block; "><{$paperHeader[4].Title}></div>
+	         <{/if}>
+	            <{if $paperHeader[4].IsShow !="1"}>
+	         <div class="paper-info" data-id="<{$paperHeader[4].Id}>" style=" display: none; "><{$paperHeader[4].Title}></div>
+	         <{/if}>
+	          <{if $paperHeader[5].IsShow =="1"}>
+	         <div class="student-info" data-id="<{$paperHeader[5].Id}>" style=" display: block; "><{$paperHeader[5].Title}></div>
+	         <{/if}>
+	          <{if $paperHeader[5].IsShow !="1"}>
+	         <div class="student-info" data-id="<{$paperHeader[5].Id}>" style=" display: none; "><{$paperHeader[5].Title}></div>
+	         <{/if}>
+	          <{if $paperHeader[6].IsShow =="1"}>
+	         <div class="count-box" data-id="<{$paperHeader[6].Id}>" style=" display: block; ">
+	                    <table>
+	                        <tbody>
+	                            <tr>
+	                                <td>题号</td><td>一</td><td>二</td><td>三</td>
+	                                <td>四</td><td>五</td><td>六</td><td>七</td>
+	                                <td>八</td> <td>总分</td>
+	                            </tr>
+	                            <tr>
+	                                 <td>得分</td><td>&nbsp;</td>
+	                                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+	                                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	          </div>
+	          <{/if}>
+	           <{if $paperHeader[6].IsShow !="1"}>
+	         <div class="count-box" data-id="<{$paperHeader[6].Id}>" style=" display: none; ">
+	                    <table>
+	                        <tbody>
+	                            <tr>
+	                                <td>题号</td><td>一</td><td>二</td><td>三</td>
+	                                <td>四</td><td>五</td><td>六</td><td>七</td>
+	                                <td>八</td> <td>总分</td>
+	                            </tr>
+	                            <tr>
+	                                 <td>得分</td><td>&nbsp;</td>
+	                                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+	                                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	          </div>
+	          <{/if}>
+	          
+	         <div class="paper-type-box" data-color="yellow">
+	                <div class="type-handle-box" data-id="<{$paperContent[0].Id}>" style=" display: block; ">
+	                    <dl>
+	                        <dt style="font-size: 16px; font-weight: bold;"><{$paperContent[0].Title}></dt>
+	                        <dd><{$paperContent[0].QDesc}></dd>
+	                    </dl>
+	                    <div class="control-box">
+	                        <a href="#">
+	                            <span class="set-icon"></span>
+	                        </a>
+	                    </div>
+	                </div>
+	                 <{if $paperHeader[7].IsShow =="1"}>  <!-- 注意事项栏 -->
+	                <div class="unit-box alert-info" data-id="<{$paperHeader[7].Id}>" style=" display: block; ">
+	                    <dl>
+	                        <dd style="font-size: 14px; font-weight: bold; padding-left: 28px;">
+					              <{$paperHeader[7].Title}>        
+	                        </dd>
+	                    </dl>
+	                </div>
+	                <{/if}>
+	                  <{if $paperHeader[7].IsShow !="1"}>
+	                <div class="unit-box alert-info" data-id=" <{$paperHeader[7].Id}>" style=" display: none; ">
+	                    <dl>
+	                        <dd style="font-size: 14px; font-weight: bold; padding-left: 28px;">
+					              <{$paperHeader[7].Title}>        
+	                        </dd>
+	                    </dl>
+	                </div>
+	                <{/if}>
+	                <div class="question-box" data-color="green">
+	                <{if $paperContent[0]['two']}>
+	                <div class="question-handle-box" data-id="<{$paperContent[0]['two']['0'].Id}>" data-categoryid="2" 
+	                                                     data-title="选择题" style=" display: block; ">
+	                        <div class="count-left-box" style=" display: block; ">
+	                            <table>
+	                                <tbody>
+	                                    <tr><th>评卷人</th> <th>得 分</th></tr>
+	                                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                        <div class="type-title">
+	                            <span class="type-title-nu">一</span>、<span class="change-inner-title"><{$paperContent[0]['two']['0'].Title}></span>（<span class="change-inner-des"><{$paperContent[0]['two']['0'].QDesc}></span>）      
+	                        </div>
+	                          <div class="control-box">
+	                            <a href="#"><span class="score" data-flag="1">标定分数</span></a>
+	                            <a href="#"><span class="clear">清空</span></a>
+	                            <a href="#"><span class="del-icon"></span></a>
+	                            <a href="#"><span class="set-icon"></span></a>
+	                        </div>
+	                  </div>
+	                  <{/if}>
+	                    <input type="hidden" name="examstatu" value="" />
+							<{foreach item=item from=$paperContent[0]['two'][0].list}>
+							<div class="question-item-box" data-color="grey"
+								data-id="<{$item.Id}>">
+								<div class="control-box">
+									<a href="#"><span class="detail">详细</span></a> 
+									<a href="#"><span class="del-icon" title="删除"></span></a> 
+									<a href="#"><span  class="up-icon"></span></a>
+									 <a href="#"><span  class="down-icon"></span></a>
+								</div>
+
+								<div class="quesbox" data-id="7497"
+									data-questionid="<{$item.Id}>" data-score="0.00"
+									data-status="-1" data-num="0">
+									<div class="quesdiv" style="margin-left: 10px">
+										<{$item.Body}></div>
+								</div>
+							</div>
+							<{/foreach}>
+                   </div>
+	         </div>       
+	       <!-- 非选择题 -->	  
+	     <{foreach item=item from =$twoSection}>       
+	      <div class="paper-type-box" data-color="yellow">
+	                <div class="type-handle-box" data-id="<{$item.Id}>" style=" display: block; ">
+	                    <dl>
+	                        <dt style="font-size: 16px; font-weight: bold;"><{$item.Title}></dt>
+	                        <dd><{$item.QDesc}></dd>
+	                    </dl>
+	                    <div class="control-box">
+	                        <a href="#">
+	                            <span class="set-icon"></span>
+	                        </a>
+	                    </div>
+	                </div>
+              <{foreach item=item2 from=$item.two}>
+	         <div class="question-box" data-color="green">
+	                    <div class="question-handle-box" data-id="<{$item2.Id}>" data-categoryid="8" data-num="" data-title="现代文阅读" 
+	                    style=" display: block; ">
+	                        <div class="count-left-box" style=" display: block; ">
+	                            <table>
+	                                <tbody>
+	                                    <tr><th>评卷人</th><th>得 分</th></tr>
+	                                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                        <div class="type-title">
+	                            <span class="type-title-nu"><{$item2.hanzi}> </span>、<span class="change-inner-title"> <{$item2.Title}> </span>（<span class="change-inner-des"> <{$item2.QDesc}></span>）   
+	                        </div>
+	                        <div class="control-box">
+	                            <a href="#"><span class="score" data-flag="1">标定分数</span></a>
+	                            <a href="#"><span class="clear">清空</span></a>
+	                            <a href="#"><span class="del-icon"></span></a>
+	                            <a href="#"><span class="set-icon"></span></a>
+	                        </div>
+	                    </div>
+	                    <input type="hidden" name="examstatu" value="" />	  
+	                     <{foreach item=item3 from=$item2.list}>
+				        <div class="question-item-box" data-color="grey" data-id="<{$item3.Id}>">
+			                <div class="control-box">
+	                            <a href="#"><span class="detail">详细</span></a>
+	                            <a href="#"> <span class="del-icon" title="删除"></span></a>
+	                            <a href="#"><span class="up-icon"></span></a>
+	                            <a href="#"><span class="down-icon"></span></a>
+			                 </div>                                       
+			                <div class="quesbox" data-id="6940" data-questionid="" data-score="0.00" data-status="1" data-num="0">
+			                    <div class="quesdiv" style="margin-left: 10px">
+			                            <{$item3.Body}>
+			                    </div>
+			                </div>
+				        </div>	
+				      <{/foreach}>                     
+	              </div>           
+                <{/foreach}>       	        				
+	        </div>
+	     <{/foreach}>
+	      </div>
+      </div>
+    </div>
+   </form>
+</div>
+
+<script type="text/javascript" src="./js/paper.js" ></script>
+   
+<div id="myDialog"></div>
+<div id="questionDetail"></div>
+<div id="biaoDingScore"></div>
+<div id="examId"><{$examId}></div>
+
+
+  
+  
+  
+  
+  
+  

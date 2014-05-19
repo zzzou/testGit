@@ -1,0 +1,478 @@
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+<link href="./css/first.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="./js/jquery/jquery.form.js"></script>
+
+<script type="text/javascript" src="./js/proposition/create_proposition.js"></script>
+<!-- 弹出层-->
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+<style>
+.combo-arrow {
+	background:
+		url("themes/default/images/combo_arrow_my.png")
+		no-repeat scroll center center rgba(0, 0, 0, 0);
+}
+.onError {
+background: #FFF2E9 url(./images/onError.gif) no-repeat;
+padding-left: 25px;
+font-size: 12px;
+line-height: 22px;
+vertical-align: middle;
+}
+
+.combo {
+	border-color: #BBBBBB;
+}
+
+.shenhe_bg {
+	background: none repeat scroll 0 0 #E4E3E3;
+}
+
+.panel-body {
+	border-width: 0;
+}
+
+.panel-header,.panel-body {
+	border-width: 0px;
+}
+
+.panel-header {
+	background: linear-gradient(to bottom, #E4E3E3 0px, #E4E3E3 100%)
+		repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.datagrid-header,.datagrid-td-rownumber {
+	background: #666;
+	color: #fff;
+}
+
+.tr_bg {
+	background: #666;
+	color: #fff;
+}
+.renw_cont dl dt{
+	background: #eeeeee;
+
+}
+.renw_cont dd a {
+color: #75b7d6;
+}
+input:-moz-placeholder { color: #226794; }
+::-webkit-input-placeholder { color:#226794; }
+
+
+</style>
+
+<div class="newTabCR">
+    <form
+        action="index.php?c=proposition&a=save&id=<{$proposition.id}>"
+        method="post" id="proposition_form">
+        <input type="hidden" id="state" name="state" value="0" />
+        <div class="cont_box fr">
+            <{if empty($id)}>
+            <div class="location">
+                <a href="#">发起命题</a> &gt; <a href="#"> 新建任务</a>
+            </div>
+            <h3>新建任务</h3>
+            <{else}>
+            <div class="location">
+                <a href="#">命题任务</a> &gt; <a href="#"> 编辑任务</a>
+            </div>
+            <h3>编辑任务</h3>
+            <{/if}>
+            <div class="renw_cont">
+            <{if empty($id)}>
+                <h6>
+                    <input name="name" style="background-color:#c5e9fe" class="edit_task" type="text"
+                        placeholder="请输入任务名称..."/>
+                </h6>
+            <{else}>
+                <h6>
+                    <input name="name" value="<{$proposition.name}>" class="edit_task" type="text"/>
+                </h6>
+            <{/if}>
+                <dl>
+                    <{if empty($id)}>
+                    <dt>①任务基础信息</dt>
+                    <dd>
+                        学段：<select name="study_section">
+                           <option vlaue="高中">高中</option>
+                           <option vlaue="小学">小学</option>
+                           <option vlaue="初中">初中</option>
+                           </select>
+                    </dd>
+                    <dd>
+                        学科：<select name="subject">
+                        <option value="语文">语文</option>
+                        <option value="数学">数学</option>
+                        </select>
+                    </dd>
+                    <dd>
+                        考试对象：<select name="object">
+                        <option value="一年级">一年级</option>
+                        <option value="二年级">二年级</option>
+                        <option value="三年级">三年级</option>
+                        </select>
+                    </dd>
+                    <dd>
+                        考试类型：<select name="type">
+                        <option value="期末考试">期末考试</option>
+                        <option value="期中考试">期中考试</option>
+                        <option value="学期测验">学期测验</option>
+                        </select>
+                    </dd>
+                    <dd>
+                        试卷满分：<input name="test_value" type="text" value="100"
+                            class="line_h" />
+                    </dd>
+                    <dd>
+                        试卷难度：<input name="Vote1" type="radio" value="容易" /> 容易 <input
+                            name="Vote1" type="radio" value="较易" /> 较易 <input name="Vote1"
+                            type="radio" value="一般" checked="checked" /> 一般 <input
+                            name="Vote1" type="radio" value="较难" /> 较难 <input name="Vote1"
+                            type="radio" value="困难" /> 困难
+                    </dd>
+                    <dd>
+                        考试时长：<input name="exam_time" type="text" value="" /> 分钟 （<span style="color:#339c31">可不填<span>）
+                    </dd>
+                    <{else}>
+                    <dt>①任务基础信息</dt>
+                    <dd>
+                        学段： <select name="study_section">
+                            <{html_options
+                            options=$section selected=$proposition.study_section}>
+                        </select>
+                    </dd>
+
+                    <dd>
+                        学科： <select name="subject"> <{if
+                            $proposition.subject=="语文"}>
+                            <option selected="selected" value="语文">语文</option>
+                            <option value="数学">数学</option> <{else}>
+                            <option value="语文">语文</option>
+                            <option selected="selected" value="数学">数学</option> <{/if}>
+                        </select>
+                    </dd>
+                    <dd>
+                        考试对象： <select name="object"> <{html_options
+                            options=$object selected=$proposition.object}>
+                        </select>
+                    </dd>
+                    <dd>
+                        考试类型： <select name="type"> <{html_options options=$type
+                            selected=$proposition.type}>
+                        </select>
+                    </dd>
+                    <dd>
+                        试卷满分：<input name="test_value" type="text"
+                            value="<{$proposition.score}>" class="line_h" />
+                    </dd>
+                    <dd>试卷难度： <{html_radios name="Vote1" options=$difficulty
+                        checked=$proposition.difficulty }></dd>
+                    <dd>
+                        考试时长：<input name="exam_time" type="text"
+                            value="<{$proposition.exam_time}>" /> 分钟 （可不填）
+                    </dd>
+                    <{/if}>
+                </dl>
+                <dl id="test">
+                    <dt>②任命信息</dt>
+                    <dd>
+                        <div id="kwzzr">
+                            考务组织人：<span id="nameSpan1"><{if
+                                $proposition.organizers}><{sizeof(explode(',',
+                                $proposition.organizers))}>人（<{$proposition.organizers}>）<{else}>0人<{/if}></span>
+                            <a id="editKwzzr" style="cursor: pointer;">编辑</a>
+                            <span class="onError" id="organzise_error" style="width:250px;margin-left:30px;display:none">请选择考务组织人！</span>
+                        </div>
+                        <div id="p" class="shenhe_bg" title="考务组织人"
+                            style="width: 650px; height: 400px; padding: 10px; margin-top: 0px;">
+
+                            <span class="ax_text">考务组织人：</span> <span id="number"
+                                class="ax_text"></span>&nbsp;&nbsp;<span id="kwzzPerson"></span>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="btnSave" class="ax_save">
+                                保存</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="u197" class="ax_text">
+                                <img id="u197_img" class="img "
+                                src="./images/u197.png" />
+                                <div id="u198" class="text">
+                                    <p>
+                                        <span>只能设置1名考务组织人。</span>
+                                    </p>
+                                </div>
+                            </span>
+
+                            <div style="margin: 20px 0;"></div>
+
+                            <input id="cc" name="dept" value="aa"> <input id="cc2"
+                                name="dept" value="aa"> <input id="cc3" name="dept"
+                                value="aa"> <input id="cc4" name="dept" value="aa">
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <input id="searchCondition" name="dept" type="text" size="10">
+
+                            <a id="btn" class="easyui-linkbutton"
+                                style="background: #808080; color: #ffffff; border-width: 0px;">搜索</a>
+
+                            <div style="margin: 10px 0;"></div>
+
+
+                            <table id="dg" class="easyui-datagrid"
+                                style="width: 600px; height: 250px"
+                                data-options="singleSelect:true,url:'./js/json/datagrid_data1-rmxx.json',method:'get'">
+                                <thead>
+                                    <tr>
+                                        <th data-options="field:'cityId',width:50,checkbox:true"></th>
+                                        <th data-options="field:'areaId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'schoolId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'classId',width:50,hidden:true">
+                                        </th>
+
+                                        <th data-options="field:'id',width:50">ID</th>
+                                        <th data-options="field:'school',width:50">学校</th>
+                                        <th data-options="field:'grade',width:50">年级</th>
+                                        <th data-options="field:'name',width:50">姓名</th>
+                                        <th data-options="field:'sex',width:50">性别</th>
+                                        <th data-options="field:'position',width:50,align:'center'">职务</th>
+
+                                        <th data-options="field:'subject',width:50,align:'center'">学科</th>
+                                        <th
+                                            data-options="field:'professional',width:100,align:'center'">职称</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </dd>
+                    <dd>
+
+                        <div id="kwzzr2">
+                            试题审核人：<span id="nameSpan2"><{if
+                                $proposition.assign_teachers}><{sizeof(explode(',',
+                                $proposition.assign_teachers))}>人（<{$proposition.assign_teachers}>）<{else}>0人<{/if}>
+                            </span><a id="editStshr" style="cursor: pointer;">编辑</a>
+                        </div>
+                        <div id="p2" class="shenhe_bg" title="试题审核人"
+                            style="width: 650px; height: 400px; padding: 10px; margin-top: 0px;">
+                            <span class="ax_text">试题审核人：</span> <span
+                                id="stshrPersonNumber" class="ax_text"></span>&nbsp;&nbsp;<span
+                                id="stshrPerson"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+                                id="btnSave2" class="ax_save"> 保存</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <div style="margin: 20px 0;"></div>
+
+                            <input id="cc5" name="dept" value="aa"> <input id="cc6"
+                                name="dept" value="aa"> <input id="cc7" name="dept"
+                                value="aa"> <input id="cc8" name="dept" value="aa">
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <input id="searchCondition" name="dept" type="text" size="10">
+
+                            <a id="btn2" class="easyui-linkbutton"
+                                style="background: #808080; color: #ffffff; border-width: 0px;">搜索</a>
+
+                            <div style="margin: 10px 0;"></div>
+
+
+                            <table id="dg2" class="easyui-datagrid"
+                                style="width: 600px; height: 250px"
+                                data-options="singleSelect:false,url:'./js/json/datagrid_data1-rmxx.json',method:'get'">
+                                <thead>
+                                    <tr>
+                                        <th data-options="field:'cityId',width:50,checkbox:true"></th>
+                                        <th data-options="field:'areaId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'schoolId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'classId',width:50,hidden:true">
+                                        </th>
+
+                                        <th data-options="field:'id',width:50">ID</th>
+                                        <th data-options="field:'school',width:50">学校</th>
+                                        <th data-options="field:'grade',width:50">年级</th>
+                                        <th data-options="field:'name',width:50">姓名</th>
+                                        <th data-options="field:'sex',width:50">性别</th>
+                                        <th data-options="field:'position',width:50,align:'center'">职务</th>
+
+                                        <th data-options="field:'subject',width:50,align:'center'">学科</th>
+                                        <th
+                                            data-options="field:'professional',width:100,align:'center'">职称</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </dd>
+                    <dd>
+
+                        <div id="kwzzr3">
+                            &nbsp;&nbsp;&nbsp;命题教师：<span id="nameSpan3"><{if
+                                $proposition.auditors}><{sizeof(explode(',',
+                                $proposition.auditors))}>人（<{$proposition.auditors}>）<{else}>0人<{/if}></span>
+                            <a id="editMtls" style="cursor: pointer;">编辑</a>
+                        </div>
+                        <div id="p3" class="shenhe_bg" title="命题教师"
+                            style="width: 650px; height: 400px; padding: 10px; margin-top: 0px;">
+                            <span class="ax_text">命题教师：</span> <span id="mtlsPersonNumber"
+                                class="ax_text"></span>&nbsp;&nbsp;<span id="mtlsPerson"></span>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="btnSave3" class="ax_save">
+                                保存</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                            <div style="margin: 20px 0;"></div>
+
+                            <input id="cc9" name="dept" value="aa"> <input
+                                id="cc10" name="dept" value="aa"> <input id="cc11"
+                                name="dept" value="aa"> <input id="cc12" name="dept"
+                                value="aa">
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <input id="searchCondition" name="dept" type="text" size="10">
+
+                            <a id="btn3" class="easyui-linkbutton"
+                                style="background: #808080; color: #ffffff; border-width: 0px;">搜索</a>
+
+                            <div style="margin: 10px 0;"></div>
+
+
+                            <table id="dg3" class="easyui-datagrid"
+                                style="width: 600px; height: 250px"
+                                data-options="singleSelect:false,url:'./js/json/datagrid_data1-rmxx.json',method:'get'">
+                                <thead>
+                                    <tr>
+                                        <th data-options="field:'cityId',width:50,checkbox:true"></th>
+                                        <th data-options="field:'areaId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'schoolId',width:50,hidden:true">
+                                        </th>
+                                        <th data-options="field:'classId',width:50,hidden:true">
+                                        </th>
+
+                                        <th data-options="field:'id',width:50">ID</th>
+                                        <th data-options="field:'school',width:50">学校</th>
+                                        <th data-options="field:'grade',width:50">年级</th>
+                                        <th data-options="field:'name',width:50">姓名</th>
+                                        <th data-options="field:'sex',width:50">性别</th>
+                                        <th data-options="field:'position',width:50,align:'center'">职务</th>
+
+                                        <th data-options="field:'subject',width:50,align:'center'">学科</th>
+                                        <th
+                                            data-options="field:'professional',width:100,align:'center'">职称</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>③任务提交期限</dt>
+                    <dd>
+                        <{if empty($id)}>
+
+                        <p>
+                            <input name="start_time" id="start_time" />~
+                            <input name="end_time" id="end_time"/>
+                            <span class="onError" id="time_error" style="width:250px;margin-left:30px;display:none">请选择任务提交期限！</span>
+                        </p>
+                        <{else}>
+                        <p>
+                            <input
+                                value="<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>"
+                                name="start_time" id="start_time"/>~
+                            <input
+                                value="<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>"
+                                name="end_time" id="end_time"/>
+                        </p>
+                        <{/if}>
+                    </dd>
+                </dl>
+                <div class="baoc">
+                    <input name="" type="button" id="task_button" class="btn_fb"
+                        value="发起命题" href="#demo" /> <input name="" type="button"
+                        id="task_save" class="btn_bc" value="保存" style="background: #7cc16c;color:white"/> <input name=""
+                        type="button" class="btn_qx" onclick="location.href='index.php?c=proposition&a=getDemandingTask'" value="取消" style="background: #c1cbc0;color:white"/>
+                </div>
+                <div class="mtbc" style="display: none">命题任务已保存</div>
+            </div>
+
+        </div>
+
+        <div id="demo" style="display: none">
+            <div class="wfb">
+                <div class="wf_bg">
+                    <h5 class="fl">2013~2014学年第一学期高一年级语文期中考试命题任务</h5>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wfb_cont" id="js1">
+                    <dl>
+                        <dt></dt>
+                        <dd>
+                            <font class="study_section"></font> <font class="type"></font>
+                            <div class="clear"></div>
+                        </dd>
+                        <dd>
+                            <font class="subject"> </font>
+                        </dd>
+                        <dd>
+                            <font class="object"> </font><font class="Vote1"></font>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>相关人员</dt>
+                        <dd>
+                            考务组织人：<span class="organzise">0人</span>
+                        </dd>
+                        <dd>
+                            试卷审核：<span class="check">0人</span>
+                        </dd>
+                        <dd>
+                            命题教师：<span class="teacher">0人</span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>提交期限</dt>
+                        <dd>
+                            <span class="start_time1"></span>~
+                            <psan class="end_time1"></psan>
+                        </dd>
+                    </dl>
+                    <div class="tash_save" style="height: 80px;">
+                        <p>
+                            <input id="save" style="width: 60px;" class="btn_fqcp"
+                                value="确认发送">
+                        </p>
+                        <p>
+                            <input style="width: 60px;" class="btn_fqcp" value="稍后发送">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

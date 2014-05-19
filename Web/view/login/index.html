@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录页</title>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/base.css" />
+    <link rel="stylesheet" type="text/css" href="./css/login.css" />
+
+    <script type="text/javascript" src="./js/jquery/jquery-1.9.1.min.js" ></script>
+    <script type="text/javascript" src="js/login.js" ></script>
+</head>
+<body style="background:#fff;">
+<div id="wrap">
+    <div class="ea_head">
+        <div class="ea_headcon">
+            <a href="#" class="ea_logo"><img src="images/ea_dlcLOGO.png" /></a>
+        </div>
+    </div>
+    <div class="ealog_bg">
+        <div class="ealog_main">
+            <div id="login_form" class="ealog_con login_form">
+                <p id="err_msg" class=" ea_dlred"></p>
+                <!--0107-->
+                <div class="ea_dl">
+                    <label class="inlined" for="tb_username" style="line-height: 21px;">用户名</label>
+                    <input id="tb_username" type="text" class="ea_dlInput input-text" />
+                </div>
+                <div class="ea_dl">
+                    <label class="inlined" for="tb_username" style="line-height: 21px;">密码</label>
+                    <input id="tb_pwd" type="password" class="ea_dlInput input-text" />
+                </div>
+                <div class="ea_dlcap" style="position:relative;">
+                    <label class="inlined" for="tb_username" style="line-height: 21px;">验证码</label>
+                    <input id="tb_validcode" type="text" class="ea_dlcode input-text" /><img id="img_code" style="background:none;" src="./index.php?c=user_controller&a=getCode" class="ea_dlcodeImg" /><a id="lbtn_changecode" href="javascript:;">换一张</a>
+                </div>
+                <div class="ealog_btn">
+                    <input id="btn_submit" type="button" class="ealo_btn" onmouseout="this.className='ealo_btn'" onmouseover="this.className='ealo_btnhov'" />
+                    <div class="forgetpwd">
+                        <a id="forget_pwd" href="javascript:;">忘记密码？</a>
+                        <p style="opacity:0;" id="forget_pwd_info">您可以通过以下方式联系客服，来找回密码或重置密码。 客服热线:400-888-6250</p>
+                    </div>
+                </div>
+            </div>
+            <!--1226-->
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="ea_newsModel">
+        <div class="ea_newsModelCon">
+            <div class="ea_newsModelTit">
+                <span class="ea_newsModelNote">通知公告</span>
+                <span class="ea_newsModelMore"><a target="_blank" href="<{$newsUrl}>/a/tongzhigonggao/">更多&gt;&gt;</a></span>
+                <div class="clear"></div>
+            </div>
+            <div class="ea_newsModelConp">
+                <ul>
+                    <script src='<{$newsUrl}>/data/js/2.js' language='javascript'></script>
+                </ul>
+            </div>
+        </div>
+        <div class="ea_newsModelConCen">
+            <div class="ea_newsModelTitCen">
+                <span class="ea_newsModelNoteCen">区域动态</span>
+                <span class="ea_newsModelMore"><a target="_blank" href="<{$newsUrl}>/a/quyudongtai/">更多&gt;&gt;</a></span>
+                <div class="clear"></div>
+            </div>
+            <div class="ea_newsModelConp">
+                <ul>
+                    <script src='<{$newsUrl}>/data/js/3.js' language='javascript'></script>
+                </ul>
+            </div>
+        </div>
+        <div class="ea_newsModelConLast">
+            <div class="ea_newsModelTitLast">
+                <span class="ea_newsModelNoteLast">行业动态</span>
+                <span class="ea_newsModelMore"><a target="_blank" href="<{$newsUrl}>/a/xingyedongtai/">更多&gt;&gt;</a></span>
+                <div class="clear"></div>
+            </div>
+            <div class="ea_newsModelConp">
+                <ul>
+                    <script src='<{$newsUrl}>/data/js/4.js' language='javascript'></script>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--1223-->
+<div class="ea_foot2">
+    <p>皖ICP备05001217号 安徽科大讯飞信息股份有限公司 版权所有</p>
+</div>
+<!--1223-->
+</div>
+<!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setCookieDomain", "*.<{$piwikDomain}>"]);
+    _paq.push(["setDomains", ["*.<{$piwikDomain}>"]]);
+    _paq.push(["trackPageView"]);
+    _paq.push(["enableLinkTracking"]);
+
+    (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://<{$piwikUrl}>/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "<{$piwikWebID}>"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Piwik Code -->
+</body>
+</html>

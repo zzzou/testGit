@@ -1,0 +1,31 @@
+
+    <{load_topnav modelID=$modelID navs='topnavs' cur='cur'}>
+<div class="epd_top_bar">
+    <div class="epd_top_bar_con">
+        <a href="#" class="epd_top_bar_logo" title="畅言教育评价系统"><img src="images/epd_top_bar_logo.png" alt=""></a>
+        <ul class="epd_top_bar_menu">
+            <{foreach $topnavs as $nav}>
+                <{if $cur['model_id'] == $nav['model_id']}>
+                    <li class="active_menu"><a href="<{$nav['url']}>"><{$nav.model_name}></a></li>
+                <{else}>
+                    <li><a href="<{$nav['url']}>"><{$nav.model_name}></a></li>
+                <{/if}>
+            <{/foreach}>
+           
+        </ul>
+        <div class="epd_help_feedback">
+        	<span class="epdCopy_hd"></span>
+            <a class="epdCopy_arrows"><{$username}>
+            	<ul class="epdCopy_ar_con">
+                	<li >张琳琳</li>
+                    <li>张琳琳琳</li>
+                    <li>张琳琳琳琳</li>
+                </ul>
+            </a>
+            <a href="#" class="epd_feedback">反馈</a>
+            <span class="epdCopy_line"></span>
+            <a href="#" class="epd_help">帮助</a>
+        </div>
+        
+    </div>
+</div>

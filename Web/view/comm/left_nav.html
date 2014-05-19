@@ -1,0 +1,40 @@
+<style>
+.epd_left_side *{font-size:16px;color:#556583}
+.span{color:#d8e5ff}
+</style>
+<{load_leftnav modelID=$modelID navs='leftnavs' cur='cur'}>
+        <!--template-->
+        <div id="left_nav" class="epd_left_side">
+            <{foreach $leftnavs as $nav}>
+                <{if count($nav['childs']) > 0}>
+                    <dl class="collapse" style="height:52px">
+                    <dt>
+                        <a href="javascript:;">
+                        <span><{$nav['model_name']}></span>
+                        <img src="images/epd_left_side_dtdown.png" alt="">
+                        </a>
+                    </dt>
+                    <{foreach $nav['childs'] as $child}>
+                        <{if $cur['model_id'] == $child['model_id']}>
+                            <dd class="active"><a href="<{$child['url']}>" class="epd_active_ls_dd"><em></em><{$child['model_name']}></a></dd>
+                        <{else}>
+                            <dd ><a href="<{$child['url']}>"><em></em><{$child['model_name']}></a></dd>
+                        <{/if}>
+                    <{/foreach}>
+                <{else}>
+                    <dl>
+                    <dt>
+                    <{if $cur['model_id'] == $nav['model_id']}>
+                        <a href="<{$nav['url']}>" class="epd_active_ls_dt">
+                        <span class="span"><{$nav['model_name']}></span>
+                    <{else}>
+                        <a href="<{$nav['url']}>">
+                        <span><{$nav['model_name']}></span>
+                    <{/if}>
+                        </a>
+                    </dt>
+                <{/if}>
+            </dl>
+            <{/foreach}>
+        </div>
+<!--template-->

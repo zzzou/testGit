@@ -1,0 +1,301 @@
+<link href="css/lianb.css" rel="stylesheet" type="text/css" />
+<link href="css/first.css" rel="stylesheet" type="text/css" />	
+<style type="text/css">
+ /*为了解决 datagrid 不出现checkbox 冲突 与 lianb.css 文件 */
+ table tbody .datagrid-header-row td .datagrid-header-check input{	
+ 	 width:15px;
+ }
+ 
+ table tbody tr td .datagrid-cell-check input{	
+ 	 width:15px;
+ }
+   
+.combo-arrow {
+    background: url("images/combo_arrow_my.png")  
+	no-repeat scroll center center rgba(0, 0, 0, 0);
+}
+
+.combo {
+    border-color: #BBBBBB;
+}
+.shenhe_bg {
+    background: none repeat scroll 0 0 #E4E3E3;
+}
+
+.panel-body {
+    border-width: 0;
+}
+
+.panel-header, .panel-body {
+    border-width: 0px;
+}
+
+.panel-header {
+    background: linear-gradient(to bottom, #E4E3E3 0px, #E4E3E3 100%) repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.datagrid-header, .datagrid-td-rownumber {
+  background: #666;
+  color: #fff;
+}
+
+.tr_bg {
+	background: #666;
+	color: #fff;
+}
+
+.querenmt_cont {
+    background: none repeat scroll 0 0 #F0F0F0;
+    line-height: 40px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+
+.onError {
+	background: #FFF2E9 url(images/onError.gif) no-repeat;
+	padding-left: 25px;
+	font-size: 12px;
+	line-height: 22px;
+	vertical-align: middle;
+}
+.myCloseBtn {
+    background: url("images/3.png")  
+	no-repeat scroll center center rgba(0, 0, 0, 0);
+}
+
+ .datagrid-header-row td	.datagrid-cell{
+    color:#FCF4F4
+}
+
+.renw_cont dl dt {
+	background: #eeeeee;
+
+}
+.combo-text{
+	background:#eeeeee;
+}
+
+</style>
+
+<script type="text/javascript" src="js/proposition/taskProcessing.js"></script>
+	
+<!-- 左部导航结束 -->
+<div class="cont_box fr">
+	<form action="index.php?c=proposition&a=saveMyTask" method="post" id="task_form">
+		<div class="location"><a href="#">我的任务</a> &gt; <a href="#"> 编辑任务</a></div>
+	    <h3>任务处理</h3>
+	    <div class="renw_cont">
+	 		<dl class="rwjc_cc">
+	        	<dt>①任务基础信息</dt>
+	            <dd>任务名称:<{$proposition.name}></dd>
+	            <dd>任务提交期限:<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}></dd>
+	            <dd><font>学段：<{$proposition.study_section}></font><font>考试类型：期末考试</font><font>考试时长：<{$proposition.exam_time}>分钟</font><div class="clear"></div></dd>
+	            <dd><font>科目：<{$proposition.subject}></font><font>试卷满分：<{$proposition.score}></font><div class="clear"></div></dd>
+	            <dd><font>任务名称：<{$proposition.object}></font><font>试卷难度：<{$proposition.difficulty}></font><div class="clear"></div></dd> 
+	        </dl>
+         	<dl class="mtfw_cont">
+	        	<dt>②命题范围</dt>
+	            <dd>命题截止时间：<input name="topic_time" id="topic_time" value="<{$proposition.topic_time|date_format:'%Y-%m-%d'}>"/>
+	            <input type="hidden" name="proposition_id" value="<{$proposition.id}>"/></dd>
+	            <input type="hidden" class="start_time" value="<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>"/>
+	            <input type="hidden" class="end_time" value="<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>"/>
+	  			<dd>
+	            	<div id="shrxx">
+		            	<h4>审核人信息：</h4>
+		            	已选择：<span id="kwzzPerson2Number"><{if
+										$proposition.auditors}><{sizeof(explode(',',
+										$proposition.auditors))}>人（<{$proposition.auditors}>）<{else}>0人<{/if}></span><span id="kwzzPerson2"></span> <a id="shrxxAdd" style="cursor: pointer;">添加</a>
+		            </div>
+	           		<div id="p"  class="shenhe_bg"  title="审核人信息" style="width:650px;height:400px;padding:10px;margin-top: 0px;">
+						<span class="ax_text">审核人信息：</span>
+						<span id="kwzzPersonNumber" class="ax_text" ></span>&nbsp;&nbsp;
+						<span id="kwzzPerson" class="ax_text"  ></span>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a id="btnSave"   class="ax_save" > 保存</a> 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <div style="margin:20px 0;"></div>
+						<input id="cc" name="dept" value="aa"></input>
+						<input id="cc2" name="dept" value="aa"></input>
+						<input id="cc3" name="dept" value="aa"></input>
+						<input id="cc4" name="dept" value="aa"></input>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input id="searchCondition" name="dept" type="text" size="10" ></input>
+
+						<a id="btn"  class="easyui-linkbutton" style="background: #808080;color: #ffffff;border-width: 0px;"  >搜索</a>
+						<div style="margin:10px 0;"></div>
+		
+						<table id="dg" class="easyui-datagrid"  style="width:600px;height:250px"
+								data-options="singleSelect:false,
+								url:'js/json/datagrid_data1-rmxx.json',
+								method:'get'">
+							<thead>
+								<tr>
+								   <th data-options="field:'cityId',width:50,checkbox:true"></th> 		   
+								   	<th data-options="field:'areaId',width:50,hidden:true"> </th>
+								   	 <th data-options="field:'schoolId',width:50,hidden:true"> </th>
+								   	 <th data-options="field:'classId',width:50,hidden:true"> </th>
+
+									<th data-options="field:'id',width:50"> ID</th>
+									<th data-options="field:'school',width:50">学校</th>
+									<th data-options="field:'grade',width:50">年级</th>
+									<th data-options="field:'name',width:50">姓名</th>
+									<th data-options="field:'sex',width:50">性别</th>
+									<th data-options="field:'position',width:50,align:'center'">职务</th>
+									
+									<th data-options="field:'subject',width:50,align:'center'">学科</th>
+									<th data-options="field:'professional',width:100,align:'center'">职称</th>
+								</tr>
+							</thead>
+						</table>
+					</div> 
+	            </dd>
+	               
+	            <dd>
+		            <div id="mtrxx">
+			            <h4>命题人信息：</h4>
+			            已选择：<span id="stshrPerson2Number"><{if
+										$proposition.assign_teachers}><{sizeof(explode(',',
+										$proposition.assign_teachers))}>人（<{$proposition.assign_teachers}>）<{else}>0人<{/if}></span><span id="stshrPerson2"></span> <a id="mtrxxAdd" style="cursor: pointer;">添加</a>
+		            </div>
+		             <div id="p2" class="shenhe_bg"   title="命题人信息" style="width:650px;height:400px;padding:10px;margin: 0px;">
+				
+						<span class="ax_text">命题人信息：</span> 
+						<span id="stshrPersonNumber" class="ax_text" ></span>&nbsp;&nbsp;<span id="stshrPerson"></span>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a id="btnSave2"   class="ax_save" > 保存</a> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div style="margin:20px 0;"></div>
+
+						<input id="cc5" name="dept" value="aa" />
+						<input id="cc6" name="dept" value="aa" />
+						<input id="cc7" name="dept" value="aa" />
+						<input id="cc8" name="dept" value="aa" />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<input id="searchCondition" name="dept" type="text" size="10" />
+
+						<a id="btn2"  class="easyui-linkbutton" style="background: #808080;color: #ffffff;border-width: 0px;"  >搜索</a>
+
+						<div style="margin:10px 0;"></div>
+						<table id="dg2" class="easyui-datagrid"  style="width:600px;height:250px"
+								data-options="singleSelect:false,url:'js/json/datagrid_data1-rmxx.json',method:'get'">
+							<thead>
+								<tr>
+								   <th data-options="field:'cityId',width:50,checkbox:true"></th> 		   
+								   	<th data-options="field:'areaId',width:50,hidden:true"> </th>
+								   	 <th data-options="field:'schoolId',width:50,hidden:true"> </th>
+								   	 <th data-options="field:'classId',width:50,hidden:true"> </th>
+
+									<th data-options="field:'id',width:50"> ID</th>
+									<th data-options="field:'school',width:50">学校</th>
+									<th data-options="field:'grade',width:50">年级</th>
+									<th data-options="field:'name',width:50">姓名</th>
+									<th data-options="field:'sex',width:50">性别</th>
+									<th data-options="field:'position',width:50,align:'center'">职务</th>
+									
+									<th data-options="field:'subject',width:50,align:'center'">学科</th>
+									<th data-options="field:'professional',width:100,align:'center'">职称</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+	            </dd>
+				<dd>
+					<h4>确认命题:</h4>
+					<{foreach item=item from=$items }>
+					<div style="display:block" class="querenmt_cont">
+					<{$item.topic_type}>:<{$item.count}>道
+					<span>
+					<input type="hidden" name="proposition_type[name][]" value="<{$item.topic_type}>"/>
+					</span>
+					<input type="hidden" name="proposition_type[count][]" value="<{$item.count}>"/>
+
+					<img src="images/3.png" onclick="removeDiv(this)" alt="" style="float:right;margin-top: 10px;"/>
+
+					</div>
+	        		<{/foreach}>
+					 <div  id="twoLevel" style="margin-top: 20px;">
+					题型： <input id="problemType" name="dept" value="">
+					 <input id="problemNumber" name="dept" value="">小题 
+					  <img src="images/u3282.png"  id="button" style="margin-bottom: -7px;margin-left: 15px;"/>
+					 
+					</div> 
+					 
+				
+				</dd>
+			    <dd>
+	        		<h4>教材信息：</h4>
+	        		
+	                <div class="box_xzq">
+                        <div class="xzq fl">
+                            <h6>待选教材信息 &nbsp;  &nbsp; &nbsp; 
+                            <input id="jiaocaiInformation" name="dept" value="" /></h6>
+                            <div class="xzq_cont">
+                               <div style="width: 100%;height: 250px;overflow: auto;margin: 20px;">
+                                  <ul id="tt2"></ul>
+                                </div>                      
+                            </div>
+                        </div>
+                        <div class="xuanzhijt fl"></div>
+                        
+                        <div class="fr yixuanshu" style="margin-top: 0px;">
+                            <h6>已选教材信息</h6>
+                            <select id="selectItems" name="textbooks[]" multiple="multiple" style="width:230px;height:270px;">
+                            <{foreach item=item from=$textbooks}>
+                            <option><{$item}></option>
+                            <{/foreach}>
+                            </select>
+                            <div id="textbooks_div" style="display:none">
+                             <{foreach key=key item=item from=$textbooks}>
+                           		<input name="textbooks[<{$key}>]" type="hidden" value="<{$item}>"/>
+                            <{/foreach}>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+	               
+	            </dd>
+	            
+	            <dd>
+	               <h4>知识点信息：</h4>
+	  	                
+	                  <div class="box_xzq">
+                        <div class="xzq fl">
+                            <h6>待选知识点信息 &nbsp;  &nbsp; &nbsp; </h6>
+                            <div class="xzq_cont">
+                               <div style="width: 260px;height: 250px;overflow: auto;">
+                                  <ul id="tt"></ul>
+                                </div>                      
+                            </div>
+                        </div>
+                        <div class="xuanzhijt fl"></div>
+                        <div class="fr yixuanshu" style="margin-top: 0px;">
+                            <h6>已选知识点信息</h6>
+                            <select id="selectItemsKnowledge" name="knowledge_points[]" multiple="multiple" style="width:230px;height:270px;">
+                            <{foreach item=item from=$knowledge}>
+                            <option><{$item}></option>
+                            <{/foreach}>
+                            </select>
+                            <div id="knowledge_points_div" style="display:none">
+                            <{foreach key=key item=item from=$knowledge}>
+                           		<input name="knowledge_points[<{$key}>]" type="hidden" value="<{$item}>"/>
+                            <{/foreach}>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+	               
+	            </dd>      
+	            <div class="input_btn">
+		            <input id="task_save" type="button" value="下一步" />
+		            <span class="onError" id="textbooks_error" style="width:250px;margin-left:30px;display:none">请选择教材信息！</span>	
+	            </div>
+	        </dl>
+    	</div>
+    	<div id="assign_teachers"></div>
+    	<div id="auditors"></div>
+	</form>
+</div>

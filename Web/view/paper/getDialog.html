@@ -1,0 +1,174 @@
+<style type="text/css">
+   .ui-dialog .ui-dialog-content {
+	overflow: hidden;
+   }
+</style>
+
+<div id="dlg_paper" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 45px; max-height: none; height: auto;">
+<form id="editDialogForm"  method="post">
+    <div class="openwin-box">
+        <div class="paper-set-win" style="width: 560px;">
+        <{foreach item=item from=$paperHeader}>
+         <table data-id="<{$item.Id}>">
+            <tbody>
+                <tr>
+                    <td class="title-td"><{$item.CateTitle}></td>
+                    <td class="option-td">
+                        <ul>
+                            <li class="fn-clear">
+	                            <span>
+	                                <input name="isShow[paper-IsShow-<{$item.Id}>]" type="radio" value="1" checked="checked">显示
+	                            </span>
+	                            <span>
+	                                <input name="isShow[paper-IsShow-<{$item.Id}>]" type="radio" value="0">不显示
+	                            </span>
+                            </li>
+                            <{if $item.Title !=""}>
+                             <li class="fn-clear" style="">
+	                             <span>文本</span>
+	                              <span>
+	                                    <textarea class="text-input ui-widget-content ui-corner-all" 
+	                                    name="title[paper-Title-<{$item.Id}>]" type="text"><{$item.Title}></textarea> 
+	                              </span>
+                              </li>
+                             <{/if}>                          
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <{/foreach}>
+        <!-- 
+            <td class="title-td" style="background-color: rgba(255, 214, 0, 0.721569);">副标题</td>
+            <td class="option-td" style="background-color: rgb(255, 255, 204);">
+         -->
+         <{foreach item=item from=$paperContent}>
+         <table data-id="<{$item.Id}>">
+            <tbody>
+                <tr>
+                    <td class="title-td"><{$item.CateTitle}></td>
+                    <td class="option-td">
+                        <ul>
+                            <li class="fn-clear">
+                                 <span>
+                                <input name="isShow[paper-IsShow-<{$item.Id}>]" type="radio" value="1" checked="checked">显示
+                                </span>
+                                <span>
+                                    <input name="isShow[paper-IsShow-<{$item.Id}>]" type="radio" value="0">不显示
+                                 </span>
+                             </li>
+                             <li class="fn-clear">
+                                  <span>卷标</span>
+                                  <span>
+                                      <textarea class="text-input ui-widget-content ui-corner-all" name="title[paper-Title-<{$item.Id}>]" 
+                                      type="text"><{$item.Title}></textarea> 
+                                  </span>
+                              </li>
+                              <li class="fn-clear">
+                                  <span>卷注</span>
+                                  <span>
+                                    <textarea class="text-input ui-widget-content ui-corner-all" name="QDesc[paper-QDesc-<{$item.Id}>]" type="text"><{$item.QDesc}></textarea>
+                                  </span>
+                             </li>
+                         </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <{foreach item=item2 from=$item.two}>
+      <table data-id="<{$item2.Id}>">
+            <tbody>
+                <tr>
+                    <td class="title-td"><{$item2.CateTitle}></td>
+                    <td class="option-td">
+                        <ul>
+                            <li class="fn-clear">
+                               <span>
+                                <input name="isShow[paper-IsShow-<{$item2.Id}>]" type="radio" value="1" checked="checked">显示
+                                </span>
+                                <span>
+                                    <input name="isShow[paper-IsShow-<{$item2.Id}>]" type="radio" value="0">不显示
+                                </span>
+                             </li>
+                             <li class="fn-clear">
+                                <span>评分栏<input name="IsShowScore[paper-IsShowScore-<{$item2.Id}>]" type="radio" value="1" checked="checked">显示</span>
+                                <span>
+                                        <input name="IsShowScore[paper-IsShowScore-<{$item2.Id}>]" type="radio" value="0">不显示
+                                </span>
+                              </li>
+                              <li class="fn-clear">
+                                  <span>名称</span>
+                                  <span>
+                                    <textarea class="text-input ui-widget-content ui-corner-all" 
+                                    name="title[paper-Title-<{$item2.Id}>]" type="text"><{$item2.Title}></textarea>
+                                   </span>
+                              </li>
+                              <li class="fn-clear">
+                                   <span>注释</span>
+                                   <span>
+                                    <textarea class="text-input ui-widget-content ui-corner-all" 
+                                    name="QDesc[paper-QDesc-<{$item2.Id}>]" type="text"><{$item2.QDesc}> </textarea>
+                                    </span>
+                               </li>
+                         </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         <{/foreach}>
+        <{/foreach}>
+        <input type="hidden" name="examId" value="5954">
+        </div>
+    </div>
+</form>
+
+</div>
+<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+<div class="ui-dialog-buttonset">
+<button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+<span class="ui-button-text" id="saveBtn">确定</span>
+</button>
+</div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+	  
+	  $("#saveBtn").click(function(){
+		  
+		  $("#myDialog").dialog( "close" );
+		  $('#editDialogForm').form('submit', {
+			  url:'index.php?c=paper&a=savePaper',
+		      success:function(data){
+		        //  alert("success ..success");
+		    	 // window.location.href = "index.php?c=paper&a=getPaper";
+		    	/*  $.ajax({
+		    	    	  type: "POST",
+		    	          url: "index.php?c=paper&a=getPaper"
+		    	       });
+		    	*/
+		       }		  
+		  });
+	  });
+	  
+  });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

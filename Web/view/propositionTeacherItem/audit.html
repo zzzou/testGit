@@ -1,0 +1,208 @@
+<link href="./css/lianb.css" rel="stylesheet"
+		type="text/css" />
+	<link href="./css/proposition.css" rel="stylesheet"
+		type="text/css" />
+	<link href="./css/elastic_frame.css" rel="stylesheet"
+		type="text/css" />
+	<link href="./css/lioc.css" rel="stylesheet"
+		type="text/css" />
+
+	<!-- 三方库 -->
+	 <script type="text/javascript" src="./js/jquery/jquery-1.9.1.min.js" ></script>
+   <script type="text/javascript" src="js/proposition/adult.js"></script>
+
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+    <!-- Add Button helper (this is optional) -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+    <script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+    <!-- Add Thumbnail helper (this is optional) -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+    <script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+    <!-- Add Media helper (this is optional) -->
+    <script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+    <!--   视频播放的js和css -->
+    <script src="js/proposition/video.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./css/popLayer.css" />
+    <!-- -->
+	<style type="text/css">
+
+	body {
+		color: black;
+		font-family: "微软雅黑", Arial, SimSun;
+	}
+	.btn_right_con input{
+	  padding: 5px 15px;
+	}
+        #img1{cursor: pointer;}
+	</style>
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#btn_check").fancybox({
+			//padding: 0,
+			//openEffect : 'elastic',
+			//openSpeed  : 150,
+			//closeEffect : 'elastic',
+			//closeSpeed  : 150,
+			//closeClick : true,
+			//helpers : {
+				//overlay : null
+			//}
+
+		});
+        $("#later").click( function () {
+            $(".fancybox-overlay").hide(); });
+	})
+
+
+
+	</script>
+
+<div class="newTabCR">
+    <div class="cont_box fr l_cont_box">
+        <div class="l_audit_title">
+            <h3><{$proposition.name}> </h3>
+        </div>
+        <div class="l_no_reason wfb_cont">
+            <div class="l_no_reason_left ">
+                <dl>
+                    <dt>考试信息</dt>
+                    <dd><font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font><div class="clear"></div></dd>
+                    <dd><font>学科：<{$proposition.subject}> </font><font>难度要求：<{$proposition.difficulty}></font><div class="clear"></div></dd>
+                    <dd><font>考试对象：<{$proposition.object}> </font><div class="clear"></div></dd>
+                </dl>
+            </div>
+            <div class="l_no_reason_right">
+                <dl>
+                    <dt>任务信息</dt>
+                    <dd>
+                        <font>题型：<{$propositionTeaItem.topic_type}></font>
+                        <font>知识点：<{$propositionTeaItem.knowledge_points}></font>
+                    </dd>
+									
+                </dl>
+            </div>
+            <div class="claer"></div>
+        </div>
+        <div class="l_no_reason_block">
+            <ul class="l_no_reason_block_left">
+                <li id="a1" class="l_flag"><span>1</span><label></label></li>
+                <li id="a2"><span>2</span><label></label></li>
+                <li id="a3"><span>3</span><label></label></li>
+                <li id="a4"><span>4</span><label></label></li>
+                <li id="a5"><span>5</span><label></label></li>
+                <li id="a6"><span>6</span><label></label></li>
+                <li id="a7"><span>7</span><label></label></li>
+                <li id="a8" ><span>8</span><label></label></li>
+                <li id="a9" ><span>9</span><label></label></li>
+                <li id="a10" ><span>10</span><label></label></li>
+                <div class="clear"></div>
+            </ul>
+            <div class="l_no_reason_block_middle">
+                已审核：0/10道<br/>
+                <span class="l_yellow">0</span> 题不通过，0题通过
+            </div>
+				<input id="btn_check" class="btn_fqcp" value="保存审核结果" onclick="saveTask()" href="checkOK" type="button" />	
+				<input  style="display:none" id="btn_send" type="button" class="btn_fqcp" value="发送审核结果">
+				<div class="clear"></div>
+        </div>
+        <div class="l_no_reason_block2">
+            <div class="l_blcok2_title">
+                <div class="l_blcok2_title_left">题目
+                    <img  src="./images/au01.png" />
+                    <img  id="img1" onclick="playVideo(this);" src="./images/au02.png" data-video="" />
+                </div>
+                <div class=" l_blcok2_title_right">
+                    <input type="button" id="b12" class="btn_fqcp btg" onclick="noprogress()" value="不通过" />
+                    <input type="button" id="b11" class="btn_fqcp " onclick="progress()" value="通过" />
+                    <input type="hidden" id="b33" value="<{$id}>" />
+                    <div class="clear"></div>
+                    <div class="l_btg_reason" style="display:none">
+                        <div class="l_btg_reason_block">
+                            不通过理由:<textarea id="tt"></textarea>
+                            <input id="okb" type="button" class="btn_fqcp " value="确定" onclick="okprogress()"/>
+                            <div class="l_sanjiao"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="l_blcok2_content">
+                <ul>
+                    <li>
+                        题型： 单选题
+                    </li>
+                    <li>
+                        难易度：
+                        <img src="./images/yellow_circle.png">
+                        <img src="./images/yellow_circle.png">
+                        <img src="./images/yellow_circle.png">
+                        <img src="./images/gray_circle.png">
+                        <img src="./images/gray_circle.png">
+                        (一般)
+                    </li>
+                    <li>
+                        知识点： 初中语文综合库-基础知识及语言表达-字形
+                    </li>
+                     <li>
+                        [题文]： 题目
+                    </li>
+                     <li>
+                        [答案]：
+                    </li>
+                </ul>
+				
+					
+            </div>
+            </br></br></br></br></br></br></br></br></br></br></br>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="report_elastic_frame" style="display:none" id="checkOK">
+    <div class="elastic_frame_tips">
+        <p><{$proposition.name}></p>
+        <p class="mrt10"><span class="fonts">审核完毕！</span></p>
+        
+    </div>
+    <div class="elastic_frame_con">
+        <p >【审核结果】<span id="npcn" class="yellow">2</span>题不通过，<span id="pcn" class="green">8</span>题通过。</p>
+        <table id="tab" class="mtqk_table_t mrt20 elastic_frame_table" cellspacing="1" cellpadding="0">
+            <tbody>
+                <tr>
+                    <th>题号</th>
+                    <th>审核结果</th>
+                </tr>
+                <tr>
+                    <td id="t1"></td>
+                    <td class="green">通过</td>
+                </tr>
+                <tr>
+                    <td id="t2">：</td>
+                    <td class="yellow">未通过</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_right_con mrb20 mrt100">
+        <form action="index.php?c=propositionTeacherItem&a=updateTask&id=<{$id}>" method="post">
+            <input type="hidden" value="<{$id}>" />
+            <input id="btn_send2" type="button" class="btn_fqcp" onclick="return sendTask()" value="发送审核结果">
+            <input type="button" class="btn_fqcp" id="later"  value="以后发送" >
+        </form>
+
+    </div>
+</div>
+<{include file="comm/video.html"}>
+
+

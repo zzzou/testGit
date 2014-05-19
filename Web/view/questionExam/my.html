@@ -1,0 +1,608 @@
+<link rel="stylesheet" href="./css/chosen.css" type="text/css" media="all">
+<link rel="stylesheet" href="./css/_res.css" type="text/css" media="all">
+<link rel="stylesheet" href="./css/topic_base.css" type="text/css" media="all">
+<link rel="stylesheet" href="./css/Testlibrary.css" type="text/css" media="all">
+<link id="azb_theme" rel="stylesheet" href="./css/skin_green.css" type="text/css">
+<style>
+    .ui-pnotify .ui-pnotify-shadow { height: auto; }
+    .left_wrapper ul li a { display: block; background: url(img/dian_03.png) no-repeat 0px 2px; padding-left: 15px; }
+    .fn-left { border-right: 1px solid #B8B8B8; }
+    .paging { text-align: center; }
+    .paging .pagination { display: inline-block; }
+</style>
+<script type='text/javascript' src="./js/jquery/jquery.pagination.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var menu = $('.left_wrapper'), cur_subject = "", m = 0;
+        var cateid = $('.proCon .pro dd a input:checkbox[checked=checked]:first', menu).parent().data('cate');
+        if (cateid > 0) {
+            $('.proCon .pro dd a input:checkbox[checked=checked]:first', $('.left_wrapper')).parent().siblings('[data-cate=' + cateid + ']').children('input').attr('disabled', false);
+        }
+
+        $('.fn-left_title_zn_sx', menu).hover(function () {
+            var _this = $(this);
+            _this.addClass('h_r');
+            $('.productBox', menu).show();
+            return false;
+        }, function () {
+            var _this = $(this);
+            _this.removeClass('h_r');
+            $('.productBox', menu).hide();
+            return false;
+        });
+
+        $('.fn-left_title_zn_sx .clear', menu).click(function () {
+            $('.proCon .pro dd a input:checked', menu).each(function (i, v) {
+                $(v).attr('checked', false);
+            });
+
+            $('.fn-left_title_zn_sx .pro .kj span', menu).click();
+            return false;
+        });
+
+        $('.proCon .pro dd a span').bind("click", function () {
+            var _this = $(this).parents('a:first'), pro = _this.parents('.pro');
+            var bankId = _this.data('id');
+            var oldId = _this.parents('.proCon:first').find('.kj').data('id');
+            var bankIds = "";
+            if (_this.data('cate') != 0) {
+                $('a[data-cate!=0] input:checked:not(:disabled)', pro).each(function (i, v) {
+                    bankIds += "," + $(v).parents('a:first').data('id');
+                });
+
+                if (bankIds != "") {
+                    bankIds = bankIds.substring(1);
+                    jQuery.each(bankIds, function (i, v) {
+                        if (v != _this.data('id') && _this.children('input:not(:disabled,:checked)').length > 0)
+                            bankIds = "";
+                    });
+                }
+            }
+
+            $.ajax({
+                url: './index.php?c=questionExam&a=changeSubject',
+                method:'post',
+                data:{ bankId: bankId, oldId: oldId, myPaper: 1},
+                success:function(data){
+                    var obj = data;
+                    $('.pl .cur').html(obj[0]);
+                    $('.proCon .pro dd a').removeClass('kj');
+                    $('.proCon .pro dd a').each(function(i){
+                        if(bankId == $(".proCon .pro dd a").eq(i).attr('data-id')){
+                            $(".proCon .pro dd a").eq(i).addClass('kj');
+                        }
+                    })
+
+                    var subject = '';
+
+                    $.each(obj[1].data, function(i, sub){
+                        subject +="<tr data-examid='"+sub.Id+"'><td>"+sub.Title+"</td><td>"+sub.Datacreted+"</td><td><{$item.ExamStatus}></td><td><input value='"+sub.Id+"'";
+                        if (sub.IsShare=='1') subject+=" checked ";
+                        subject +=" type='checkbox' class='share'></td><td><select name='gradeId' class='updateGrade ui-widget-content' id='grade'><option data-no='0' selected='selected'>请选择</option><option value='4'> 高一&nbsp;&nbsp;&nbsp;</option><option value='5'> 高二&nbsp;&nbsp;&nbsp;</option><option value='6'> 高三&nbsp;&nbsp;&nbsp;</option></select></td><td><a id='a_back' style='cursor: pointer;' onclick='revert("+sub.Id+")' >组卷</a>&nbsp;|&nbsp;<a id='a_delete' style='cursor: pointer;' onclick='deleteInfo("+sub.Id+")'>删除</a>&nbsp;|&nbsp;<a id='a_download' style='cursor: pointer;' onclick='loadInfo("+sub.Id+")'>下载 &nbsp;</a></td></tr>";
+                    });
+                    $('.gtable tbody').html(subject);
+                    $('.pg span').html(obj[1].pageCount);
+                    $('.pg b').eq(1).html(obj[1].count);
+                    changeShare();
+                    $(".pg a").unbind('click');
+                    if(obj[1].pageCount == '0'){
+                        $(".paging").hide();
+                    }else{
+                        $(".paging").show();
+                        $("#pagination").pagination(obj[1].pageCount, {
+                            num_edge_entries: 1, //边缘页数
+                            num_display_entries: 4, //主体页数
+                            callback: pageCallback,
+                            items_per_page: 1, //每页显示1项
+                            prev_text: "前一页",
+                            next_text: "后一页"
+                        });
+                        /*向前一页*/
+                        $('.pg .prev').click(function () {
+                            $("#pagination .prev").click();
+                        });
+
+                        /*向后一页*/
+                        $('.pg .next').click(function () {
+                            $("#pagination .next").click();
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+
+        $('.proCon .pro dd a input', menu).click(function () {
+            var _this = $(this), a = _this.parents('a:first'), pro = _this.parents('.pro:first'), con = _this.parents('.proCon:first');
+
+            $('.pro', con).removeClass('c');
+
+            pro.addClass('c');
+
+            var cur = $('.fn-left_title_zn_sx a.cur', menu);
+
+            var pl = $('.fn-left_title_zn_sx span:first', menu);
+
+            $('.clear', pl).hide();
+
+            var str = "";
+            if (a.data('cate') == 1) {
+                str = "理综：";
+            } else if (a.data('cate') == 2) {
+                str = "文综：";
+            }
+            if (str != "") {
+                $('.pro:not(.c) input', con).attr('disabled', true);
+                $('a[data-cate!=' + a.data('cate') + '] input', con).attr('disabled', true);
+
+                var len = -1;
+                $('a[data-cate=' + a.data('cate') + '] input:checked', pro).each(function (i, v) {
+                    if (i == 0) {
+                        str += $(v).parents('a:first').attr('title').substring(2);
+                    } else {
+                        str += "," + $(v).parents('a:first').attr('title').substring(2);
+                    }
+                    len = i;
+                });
+                if (m == 0) {
+                    cur_subject = cur.html();
+                    pl.addClass('pl');
+                }
+                if (len == -1) {
+                    pl.addClass('pl');
+                    cur.html(cur_subject);
+                    $('a[data-cate!=0] input', con).attr('disabled', false);
+                }
+                else {
+                    pl.removeClass('pl');
+                    $('.clear', pl).show();
+                    cur.html(cur_subject.substr(0, 2) + str);
+                    if ($('a[data-cate] input:checked', con).length == 3) {
+                        $('a[data-cate] input:checked:first').next().click();
+                    }
+                }
+            }
+            m++;
+            event.stopPropagation();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function revert(id) {
+        window.location.href="./index.php?c=paper&a=getPaper&id="+id;
+    }
+    function pageCallback(page_id){
+        page_id = page_id + 1;
+        time = $(".fore .color_title:eq(0)").attr('data-name');
+        status = $(".fore .color_title:eq(1)").attr('data-name');
+        var current = $('.current').html();
+        if (current == '前一页') {
+            current = $('.current').eq(1).html();
+        }
+        $.ajax({
+            type:'POST',
+            data:'count='+page_id+'&current='+current+'&time='+time+'&status='+status,
+            url:'./index.php?c=questionExam&a=changeTable',
+            success:function(data)
+            {
+                if(data == 0){
+                    return
+                }
+                var obj = data;
+                var subject='';
+                $.each(obj[0], function(i, sub){
+                    subject +="<tr data-examid='"+sub.Id+"'><td>"+sub.Title+"</td><td>"+sub.Datacreted+"</td><td>"+sub.ExamStatus+"</td><td><input value='"+sub.Id+"'";
+                    if (sub.IsShare=='1') subject+=" checked ";
+                    subject +="type='checkbox' class='share'></td><td><select name='gradeId' class='updateGrade ui-widget-content' id='grade'><option data-no='0' selected='selected'>请选择</option><option value='4'> 高一&nbsp;&nbsp;&nbsp;</option><option value='5'> 高二&nbsp;&nbsp;&nbsp;</option><option value='6'> 高三&nbsp;&nbsp;&nbsp;</option></select></td><td><a id='a_back' style='cursor: pointer;'  onclick='revert("+sub.Id+")' >组卷</a>&nbsp;|&nbsp;<a id='a_delete' style='cursor: pointer;' onclick='deleteInfo("+sub.Id+")'>删除</a>&nbsp;|&nbsp;<a id='a_download' style='cursor: pointer;' onclick='loadInfo("+sub.Id+")'>下载 &nbsp;</a></td></tr>";
+                });
+                $('.gtable tbody').html(subject);
+                changeShare();
+                var current = $('.current').html();
+                if (current == '前一页') {
+                    current = $('.current').eq(1).html();
+                }
+                $('.pg b').eq(0).html(current);
+            }
+        });
+    }
+    $(function(){
+
+        //此demo通过Ajax加载分页元素
+        $("#pagination").pagination(<{$pages['pageCount']}>, {
+            num_edge_entries: 1, //边缘页数
+            num_display_entries: 4, //主体页数
+            callback: pageCallback,
+            items_per_page: 1, //每页显示1项
+            prev_text: "前一页",
+            next_text: "后一页"
+        });
+
+        $('.paging .go').click(
+                function(){
+                    id = $('.paging [name=go]').val();
+                    pageCallback(id-1);
+                    $("#pagination a").each(function(i,val){
+                        if(id == val.innerHTML){
+                            $("#pagination a").eq(i).click();
+                        }
+                    });
+                }
+        )
+
+        $('.newTab_footer').hide();
+        var exam = $('#exam_tabs');
+        var pc = Number("1");
+        /*向前一页*/
+        $('.pg .prev').click(function () {
+            $("#pagination .prev").click();
+        });
+
+        /*向后一页*/
+        $('.pg .next').click(function () {
+            $("#pagination .next").click();
+        });
+
+
+        $('.paging [name=go]', exam).keydown(function (e) {
+            var _this = $(this);
+            if (_this.parents('.paging:first').find(".ajax").length > 0) {
+                if (e.keyCode == 13) {
+                    var form = _this.parents('form:first');
+                    var p = page(form);
+                    if (Number(_this.val()) >= pc) _this.val(pc);
+                    p.val(_this.val());
+                }
+            }
+        });
+
+        $('.search input', exam).keydown(function (e) {
+            var form = $(this).parents('form:first');
+            if (e.keyCode == 13) {
+                $('.search button', form).click();
+            }
+        });
+
+        $('.search button', exam).click(function () {
+            var _this = $(this);
+            var form = _this.parents('form:first');
+            var p = page(form);
+            p.val(1);
+            form.submit();
+            return false;
+        });
+
+        $('body').unbind("keydown").keydown(function (e) {
+            var _this = $(this);
+            var form = $('body :not(:hidden) form:not(:hidden)');
+            if ($('.paging .ajax', form).length > 0) {
+                var cur = Number(jQuery.trim($('.pagination .current', form).text()));
+                var p = page(form);
+                if (e.keyCode == 37) {
+                    p.val(cur - 1);
+                    form.submit();
+                }
+
+                if (e.keyCode == 39) {
+                    cur++;
+                    if (cur >= pc) cur = pc;
+                    p.val(cur);
+                    form.submit();
+                }
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    function deleteInfo(id) {
+        if (confirm("您确实要删除该信息么？")) {
+            jQuery.post('./index.php?c=questionExam&a=deleteExam', { id: id }, function (r) {
+                var data = r;
+                if (data.data == true) {
+                    window.location = "./index.php?c=questionExam&a=my";
+                    alert('删除成功');
+                }
+                else {
+                    alert("可能是由于网络原因，删除失败");
+                }
+            });
+        }
+    }
+
+    function changeShare(){
+        $(".share").bind("change", function(){
+            var flag=$(this)[0].checked?1:0;
+            var _this=$(this);
+            var id=(_this.parents("tr:eq(0)").data("examid"));
+            jQuery.post("./index.php?c=questionExam&a=shareExam", { id: id,flag:flag }, function (r) {
+                alert(r.msg);
+                if(r.code==-1)
+                {
+                    _this[0].checked=false;
+                }
+            }, 'json');
+        });
+    }
+    changeShare();
+
+</script>
+
+<script type="text/javascript">
+    function change(id){
+        var color,timeId,status,flag;
+        if(0<=id && id <=4){
+            status = $(".fore .color_title:eq(1)").attr('data-name');
+            timeId = id;
+            flag = 0;
+        }else{
+            timeId = $(".fore .color_title").eq(0).attr('data-name');
+            status = id;
+            flag = 1;
+        }
+        var current = $('.current').html();
+        if (current == '前一页') {
+            current = $('.current').eq(1).html();
+        }
+        $.ajax({
+            url: './index.php?c=questionExam&a=myPaperStory',
+            method:'post',
+            data:{ dataFlag: timeId,status:status,current: current,bankId:$('.kj').attr('data-id')},
+            success:function(data){
+                var obj = data;
+                var subject='';
+                $.each(obj[0].data, function(i, sub){
+                    subject +="<tr data-examid='"+sub.Id+"'><td>"+sub.Title+"</td><td>"+sub.Datacreted+"</td><td>"+sub.ExamStatus+"</td><td><input value='"+sub.Id+"'";
+                    if (sub.IsShare=='1') subject+=" checked ";
+                    subject +=" type='checkbox' class='share'></td><td><select name='gradeId' class='updateGrade ui-widget-content' id='grade'><option data-no='0' selected='selected'>请选择</option><option value='4'> 高一&nbsp;&nbsp;&nbsp;</option><option value='5'> 高二&nbsp;&nbsp;&nbsp;</option><option value='6'> 高三&nbsp;&nbsp;&nbsp;</option></select></td><td><a id='a_back' style='cursor: pointer;'  onclick='revert("+sub.Id+")' >组卷</a>&nbsp;|&nbsp;<a id='a_delete' style='cursor: pointer;' onclick='deleteInfo("+sub.Id+")'>删除</a>&nbsp;|&nbsp;<a id='a_download' style='cursor: pointer;' onclick='loadInfo("+sub.Id+")'>下载 &nbsp;</a></td></tr>";
+                });
+                $('.gtable tbody').html(subject);
+                $('.pg span').html(obj[0].pageCount);
+                $('.pg b').eq(1).html(obj[0].count);
+                $('.fore dd:eq('+flag+') a').removeClass('color_title');
+                $('.fore dd a').eq(id).addClass('color_title')
+                changeShare();
+                $(".pg a").unbind('click');
+                if(obj[0].pageCount == '0'){
+                    $(".paging").hide();
+                }else{
+                    $(".paging").show();
+                    $("#pagination").pagination(obj[0].pageCount, {
+                        num_edge_entries: 1, //边缘页数
+                        num_display_entries: 4, //主体页数
+                        callback: pageCallback,
+                        items_per_page: 1, //每页显示1项
+                        prev_text: "前一页",
+                        next_text: "后一页"
+                    });
+                    /*向前一页*/
+                    $('.pg .prev').click(function () {
+                        $("#pagination .prev").click();
+                    });
+
+                    /*向后一页*/
+                    $('.pg .next').click(function () {
+                        $("#pagination .next").click();
+                    });
+                }
+
+            }
+        });
+    }
+
+
+
+</script>
+
+<script type="text/javascript">
+    function _format() {
+        if (arguments.length == 0)
+            return null;
+        var str = arguments[0];
+        for (var i = 1; i < arguments.length; i++) {
+            var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+            str = str.replace(re, arguments[i]);
+        }
+        return str;
+    };
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        var wrapper = $('#a_wrapper');
+
+        $('.skin a', wrapper).click(function () {
+            var _this = $(this);
+            jQuery.post('/teacher/saveTheme', { theme: _this.attr('title') }, function (r) {
+                if (r.code == 1) {
+                    $('#azb_theme').attr('href', '/skin_' + _this.attr('title') + '.css');
+                }
+            }, "json");
+        });
+
+        $('#role_span').hover(function () {
+            $('#person_news').fadeIn();
+        });
+
+
+        $(document).click(function () {
+            $("#person_news").hide();
+        });
+
+        $('#news_span').hover(function () {
+            $('#news_content').show();
+        });
+
+        var fixHeight = function () {
+            var head = $('.head', wrapper),
+                    content = $('.content', wrapper),
+                    wrapper_n = $('.wrapper_n', wrapper),
+                    left = $('.fn-left', wrapper),
+                    right = $('.fn-right', wrapper),
+                    r_1 = $('.fn-left_content', wrapper),
+                    r_2 = $('.fn-right_content', wrapper);
+            r_3 = $('.download_dtk', wrapper);
+
+            var width = $(window).width() - left.outerWidth();
+            var height = $(window).height() - head.outerHeight(true);
+
+            content.css('height', height);
+            left.css('height', height);
+            wrapper_n.css('height', height);
+            right.css('height', height);
+            r_1.css('height', height);
+            r_2.css('height', height);
+
+            //三栏还是两栏
+            if (r_1.length > 0 && r_2.length > 0) {
+                // var minWidth = 1200 - left.width() - r_1.outerWidth();
+                var minWidth = 500;
+
+                var r_2w = width - r_1.outerWidth();
+
+                if (minWidth <= r_2w) {
+                    r_2.width(r_2w).scrollTop(1);
+
+                    $('.shitidatilan', r_2).width(r_2.width() - 20);
+
+                    $('.wrapper_zujuan', r_2).css('width', 'initial');
+                    if (r_2.scrollTop() == 1) {
+                        r_2.css('width', r_2.width() + 20);
+                    }
+                } else {
+                    r_2.width(r_2w + 20);
+                    $('.wrapper_zujuan', r_2).width(minWidth);
+                    $('.shitidatilan', r_2).width(minWidth - 20);
+                }
+            } else {
+                //var minWidth = 1200 - left.width();
+                var minWidth = 500;
+                if (minWidth <= width) {
+                    right.css('width', width).scrollTop(1);
+                    if (right.scrollTop() == 1) {
+                        right.css('width', right.width() + 20);
+                    }
+                    $('.wrapper_zujuan', right).css('width', 'initial');
+                } else {
+                    right.css('width', width);
+                    $('.wrapper_zujuan', right).width(minWidth);
+                }
+            }
+
+            if (r_3.length > 0) {
+                r_2.height($(window).height() - $('.head').outerHeight(true) - r_3.outerHeight(true));
+                r_3.width($('.really_library').outerWidth(true));
+            }
+
+        };
+
+
+        window.onload = function () {
+            $(window).bind('resize', fixHeight);
+            fixHeight();
+        };
+    });
+
+
+</script>
+
+<div class="epd_right_con" >
+    <div id="exam_tabs" class="fn-right_content" style="margin: 3px;" data-vp="/">
+        <div class="left_wrapper">
+            <div class="fn-left_title_zn_sx" style="position: relative;">
+        <span class="pl">
+            <a href="" class="cur"><{$title}></a>
+            <span class="genghuanjiegou">更换结构</span>
+            <span class="clear" style="font-size: 12px; position: absolute; display: none; cursor: pointer; right: 0; top: 0;">×</span>
+        </span>
+                <div class="productBox" style="display: none;">
+                    <div class="proCon border1">
+                        <dl class="pro">
+                            <dt><a class="bluel" style="padding-left: 0">高中</a></dt>
+                            <dd>
+                                <{foreach item=item key=k from=$class}>
+                                <a class="<{if $k==0}>kj<{/if}>" href="" data-id="<{$item.id}>" data-cate="<{$item.cate}>" title="<{$item.title}>" style="position: relative;">
+                                    <input type="checkbox" name="bankId" value="<{$item.id}>" disabled="disabled" style="position: absolute; left: 0px; top: 6px;">
+                                    <span><{substr($item.title,6)}></span>
+                                </a>
+                                <{/foreach}>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xkmh">
+            <dl class="fore">
+                <dd>时间：<a href="javascript:change(0);" class="color_title">全部</a>
+                    | <a href="javascript:change(1);" data-name="1">今天</a>
+                    | <a href="javascript:change(2);" data-name="2" >昨天</a>
+                    | <a href="javascript:change(3);" data-name="3" >本周</a>
+                    | <a href="javascript:change(4);" data-name="4" >本月</a>
+                    <input type="hidden" name="expire_time">
+                </dd>
+                <dd>状态：<a href="javascript:change(5);" class="color_title">全部</a>
+                    | <a href="javascript:change(6);" data-name="0">未考</a>
+                    | <a href="javascript:change(7);" data-name="2">已考</a>
+                    <input type="hidden" name="expire_status">
+                </dd>
+            </dl>
+        </div>
+        <div id="exam_tables" style="padding: 10px;">
+            <div style="background: #f7f7f7; border: 1px solid #cccccc; border-bottom: none; position: relative; height: 28px; line-height: 28px; margin-right: 1px;">
+                <div class="pg fl">
+                    <a href="javascript:;" class="prev">&nbsp;</a> 第<b>1</b>/<span><{$pages['pageCount']}></span>页 <a href="javascript:;" class="next">&nbsp;</a>
+                    &nbsp;&nbsp;共<b style="color: red;"><{$pages['count']}></b>卷
+                </div>
+            </div>
+            <table class="gtable" id='gtable'>
+                <thead>
+                <tr>
+                    <th id="PaperId">试卷名称</th>
+                    <th>创建时间</th>
+                    <th style="width: 40px;">状态</th>
+                    <th style="width: 70px;">是否共享</th>
+                    <th style="width: 80px;">年级</th>
+                    <th style="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <{foreach item=item key=k from=$papers}>
+                <tr data-examid="<{$item.Id}>">
+                    <td><{$item.Title}></td>
+                    <td><{$item.Datacreted}></td>
+                    <td>
+                        <{$item.ExamStatus}>
+                    </td>
+                    <td>                <input value="<{$item.Id}>" <{if $item.IsShare=='1'}>checked<{/if}> type="checkbox" class="share">
+                    </td>
+                    <td>
+                        <select name="gradeId" class="updateGrade ui-widget-content" id="grade">
+                            <option data-no="0" selected="selected">请选择</option>
+                            <option value="4"> 高一&nbsp;&nbsp;&nbsp;</option>
+                            <option value="5"> 高二&nbsp;&nbsp;&nbsp;</option>
+                            <option value="6"> 高三&nbsp;&nbsp;&nbsp;</option>
+                        </select>
+                    </td>
+                    <td><a id="a_back" style="cursor: pointer;" onclick='revert(<{$item.Id}>)' >组卷</a>&nbsp;|&nbsp;
+                        <a id="a_delete" style="cursor: pointer;" onclick="deleteInfo(<{$item.Id}>)">删除</a>&nbsp;|&nbsp;
+                        <a id="a_download" style="cursor: pointer;" onclick="loadInfo(<{$item.Id}>)">下载 &nbsp;</a>
+                    </td>
+                </tr>
+                <{/foreach}>
+                </tbody>
+            </table>
+            <div class="paging">
+                <span style="display: inline-block;"><a href="javascript:page(+0);" class="go" >跳转到</a><input name="go" value="" class="ui-widget-content ui-corner-all" style="width: 40px;">页</span>
+                <div id="pagination" class='pagination ajax' >
+                </div>
+            </div>
+            <input type="hidden" name="page">
+        </div>
+    </div>
+</div>
+<div class="gloading">
+    <img src="./images/load.gif">
+</div>
+
+
+

@@ -1,0 +1,47 @@
+.pop_layer_on {
+    overflow: hidden;
+}
+
+.pop_layer{
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+    min-height: 100%;
+    z-index: 7000;
+    top: 0;
+    left: 0;
+    padding: 16px 0px;
+    background: rgba(0,0,0,.9);
+    position: fixed;
+}
+
+.pop_layer_main {
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+}
+
+.pop_layer_close {
+    position: absolute;
+    z-index: 10;
+    right: -13px;
+    top: -13px;
+    height: 27px;
+    width: 27px;
+    line-height: 150px;
+    overflow: hidden;
+}
+
+.pop_layer_close a {
+    display: block;
+    height: 27px;
+    width: 27px;
+    overflow: hidden;
+    background-image: url(../images/popLayer.png);
+    background-position: 0 -212px;
+    cursor: pointer;
+}
+
+.pop_layer_close a:hover {
+    background-position: -28px -212px;
+}

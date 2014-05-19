@@ -1,0 +1,189 @@
+[
+	{ 
+	  "stuId" : 2,
+	  "school" : "小学",
+	  "grade" : [
+		{ 
+		  "gradeLevel" : "小学一年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "小学二年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "小学三年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "小学四年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "小学五年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "小学六年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		}
+	  ]
+	},
+	{ "stuId" : 3,
+	  "scaleName" : "初中",
+	  "grade" : [
+		{ 
+		  "gradeLevel" : "初一年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "初二年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "初三年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		}
+	  ]
+	},
+	{ "stuId" : 4,
+	  "scaleName" : "高中",
+	  "grade" : [
+		{ 
+		  "gradeLevel" : "高一年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "高二年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		},
+		{ 
+		  "gradeLevel" : "高三年级",
+		  "class": [
+			{
+			   "className" : "一班" 
+			},
+			{
+			   "className" : "二班" 
+			},
+			{
+			   "className" : "三班" 
+			}
+		  ]
+		}
+	  ]
+	}
+]
+
+
+

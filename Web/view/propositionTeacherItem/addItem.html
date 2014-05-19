@@ -1,0 +1,395 @@
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+<link href="./css/lioc.css" rel="stylesheet" type="text/css" />
+<link href="./css/xz-css.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="./js/juicer-min.js"></script>
+
+<script src="js/proposition/situation_slip.js"
+    type="text/javascript"></script>
+<script type="text/javascript" src="js/proposition/toggle.js"></script>
+	<div class="newTabCR">
+		<div class="mt_new fr">
+            <div class="mt_new_tit clearfix">
+                <p class="mt_new_tit_h" style="width:200px;"><{$proposition.name}></p>
+                <p>剩余时间：1天15小时</p>
+                <div class="count_box fr">
+                    <p>完成量：</p>
+                    <ul class="count_list fl clearfix">
+                        <{for $var=1 to $propositionTeacher.count}>
+                        <li <{if $var<=$propositionTeacher.assigned_count}>class="current"<{/if}> style="width:<{320/$propositionTeacher.count-2}>px"> </li>
+                        <{/for}>
+                    </ul>
+                    <p><{$propositionTeacher.assigned_count}>/<{$propositionTeacher.count}></p>
+                </div>
+            </div>
+            <div class="mt_new_info clearfix">
+                <ul class="mt_new_info_list">
+                    <li>任务名称：<{$proposition.name}></li>
+                    <li>任务提交期限：<{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}> 24:00</li>
+                    <li>考试对象：<{$proposition.object}></li>
+                </ul>
+                <ul class="mt_new_info_list">
+                    <li>学段：<{$proposition.study_section}></li>
+                    <li>科目：<{$proposition.subject}></li>
+                    <li>试卷难度：<{$proposition.difficulty}></li>
+                </ul>
+                <ul class="mt_new_info_list last">
+                    <li>考试时长：<{$proposition.exam_time}>分钟</li>
+                    <li>考试类型：<{$proposition.type}></li>
+                    <li>试卷满分：<{$proposition.score}></li>
+                </ul>
+            </div>
+            <ul class="mt_new_info_2">
+                <li class="clearfix"><label class="fl">教材信息：</label>
+                    <div class="ifo_con">
+                        <p class="ifo_con_tit">
+                            <a href="#" onclick="changeHeight(this);return false;">展开</a>
+                        </p>
+                        <div class="ifo_con_text">
+                            <{foreach item=item from=$proposition.textbooks}>
+                            <p><{$item}></p>
+                            <{/foreach}>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix"><label class="fl">知识点信息：</label>
+                    <div class="ifo_con">
+                        <p class="ifo_con_tit">
+                            <a href="#" onclick="changeHeight(this);return false;">展开</a>
+                        </p>
+                        <div class="ifo_con_text">
+                            <{foreach item=item from=explode(',', $propositionTeacher.knowledge_points)}>
+                            <p><{$item}></p>
+                            <{/foreach}>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix"><label class="fl">命题任务：</label>
+                    <div class="ifo_con">
+                        <p class="ifo_con_tit">
+                        </p>
+                        <div class="ifo_con_text">
+                            <{$propositionTeacher.topic_type}>：<{$propositionTeacher.count}>道
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!--题库搜题-->
+            <div class="search_data">
+                <div class="search_data_tit">
+                            知识点：    
+                           <input id="practiseType" name="dept" value="" size="25"/>
+    	                <span id="twoDiv" style="display: none;">  
+    	                 <input id="practiseFatherNumber" style="display:none" name="dept" value="" size="60" type=""/>
+    	                 </span>
+    	                   <span id="threeDiv" style="display: none;">
+    	                    <input id="practiseChildrenNumber" style="display:none" name="dept" value=""/>
+    	                   </span>
+                </div>
+                    <input id="hideSpan" name ="knowledge" type="hidden" />
+                <div class="search_data_tit border_none">
+                    题型：<span class="xz_btn xz_btn_green"><{$propositionTeacher.topic_type}></span>
+                </div>
+            </div>
+            <!--题库搜题结束-->
+
+            <!--2014/04/17-add-->
+            <div class="questions_box">
+                <div class="questions_box_tit">
+                    <div class="questions_box_tit_l">
+                        <a href="#" class="q_pre" title="上一页"></a>
+                        <span>第<em id="page">1</em>/<em id="page_number">229</em>页</span>
+                        <a href="#" class="q_next" title="下一页"></a>
+                        <span>共<em id="count">2290</em></span>
+                    </div>
+                    <div class="questions_box_tit_r">
+                        <span class="search_box">
+                            <input type="text" value="请输入您要搜索的内容">
+                            <a href="#" class="q_search_btn" title="搜索"></a>
+                        </span>
+                        <a href="#" class="xz_btn xz_btn_green" title="本页全部加入">本页全部加入</a>
+                    </div>
+                </div>
+                <div id="questions_list">
+                </div>
+            </div>
+        </div>
+	</div>
+
+<script type="text/juicer" id="question_template">
+    <div class="questions_box_con">
+        <div class="questions_box_con_tit">
+            <p class="questions_box_con_tit_l">
+                <span class="q_tit_l_n">
+                    <span>题号：${data.SourceId}</span>
+                    <span>题型：${data.CategoryId}</span>
+                    <span>难度：${data.DiffId}</span>
+                    <span>日期：${data.DateCreated}</span>
+                    <span>使用次数：${data.RefCount}</span>
+                </span>
+                <span class="q_tit_l_n">
+                    <span>标题/来源：${data.PaperTitle}</span>
+                </span>
+            </p>
+            <p class="questions_box_con_tit_r">
+                <a href="#" class="q_btn_green">添加试题</a>
+            </p>
+            <div class="clear"></div>
+        </div>
+        <div class="questions_box_con_img">
+            <img src="${data.BodyImg}" alt="">
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+var page = 1;
+var count = 0;
+var limit = 20;
+var page_number = 0;
+var knowledge_point = null;
+
+function load_data(){
+    var url = 'index.php?c=topic_controller&a=question&categoryId=<{$propositionTeacher.topic_type}>&bankId=10&pageSize='+limit+'&pageIndex='+page;
+    if(knowledge_point!=null){
+        url += '&knowledgeId='+knowledge_point;
+    }
+    $.getJSON(url, function(data){
+        count = data.count;
+        page_number = Math.ceil(count/limit);
+        $('#count').text(count);
+        $('#page_number').text(page_number);
+        $('#questions_list').html('');
+        $.each(data.data, function(i, e){
+            var tpl = $('#question_template').html();
+            var html = juicer(tpl, {
+                data:e
+            });
+            $('#questions_list').append(html);
+        })
+
+        $('#questions_list .questions_box_con_tit_r a').each(function(i, e){
+            $(e).click(function(){
+                var params = {
+                    editorContent:data.data[i].Body,
+                    editorAnswer:data.data[i].Answer,
+                    editorComment:data.data[i].Parse,
+                    difficulty:data.data[i].DiffId,
+                    knowledge:data.data[i].KnowledgeName,
+                    topic_type:data.data[i].CategoryId,
+                    id:<{$id}>
+                };
+
+                $.post('index.php?c=propositionItemTopic&a=save&id=<{$propositionTeacher.id}>', params, function(){
+                    location.href = "index.php?c=propositionTeacherItem&a=aleadyTsk&id=<{$id}>";
+                });
+                return false;
+            });
+        });
+    });
+}
+
+function page_next(){
+    if(page==page_number){
+        return false;
+    }
+    page++;
+    $('#page').text(page);
+    load_data();
+}
+
+function page_prev(){
+    if(page==1){
+        return false;
+    }
+    page--;
+    $('#page').text(page);
+    load_data();
+}
+
+var arrayStore =[];
+
+var practiseType = [];
+//练习父题型
+
+var practiseFatherNumber = [];
+
+//练习子题型
+var practiseChildrenNumber = [[[]],
+							  [[],[],[],[],[],[],[],[],[],[],[],[]],
+							  [[],[],[],[]],
+							  [[],[],[{ "id": "1", "text": "自然类文本阅读","selected":true },{ "id": "2", "text": "社科类文本阅读" }],[]],
+							  [[],[],[],[]],
+							  [[],[],[],[]],
+							  []];
+
+
+//一级题型ID
+var firstLevelID;
+//二级题型ID
+var secondLevelID;
+//三级题型ID
+var thirdLevelID;
+							  
+$(function(){
+
+	$.ajax({
+		url: './js/json/chinese_1316.json',
+		dataType:"json",
+		success: function(array){
+			
+			//arrayStore = array;			  
+			var o= new Object();
+			o.id ="all";
+			o.text ="全部";
+			o.selected =true;
+			arrayStore.push(o);
+			for(var i=0;i<array.length;i++)
+			{
+				arrayStore.push(array[i]);
+			}
+			
+			for(var i=0;i<arrayStore.length;i++)
+			{
+			   var o= new Object();
+			   o.id =arrayStore[i].id;
+			   o.text =arrayStore[i].text;
+			   if(i==0)
+				{
+				     o.selected  =  arrayStore[i].selected;
+				}
+			   practiseType.push(o);
+			}
+	
+			var temp =[];
+			for(var i=0;i<arrayStore.length;i++)
+				{
+				  temp.length =0;
+				   var childrens =  arrayStore[i].children;
+				   
+				   if( childrens==undefined)
+					   {
+					     practiseFatherNumber.push([]);
+					   }else{
+						   for(var j=0;j<childrens.length;j++)
+							{  
+							   var o= new Object();
+							   o.id =childrens[j].id;
+							   o.text =childrens[j].text;
+							   temp.push(o);
+							}					  
+						  practiseFatherNumber.push(temp);					   
+					   }
+				}
+			
+			
+			$('#practiseType').combobox({
+				valueField:'id',
+				textField:'text',
+				onSelect: function(rec){
+					
+					$('#threeDiv').hide();
+					$('#twoDiv').show();
+					 $('#practiseFatherNumber').combobox("setValue","");
+					for(var i=0;i<arrayStore.length;i++)
+					{
+					     if(rec.id ==arrayStore[i].id)
+					    	 {
+					    	  var childrens =  arrayStore[i].children;
+					    	  if( childrens==undefined)
+					    		  {
+					    		  $('#practiseFatherNumber').combobox("loadData",[]);
+					    		  }else{
+					    			  $('#practiseFatherNumber').combobox("loadData",childrens);
+					    		  }
+					    	   
+					    	 }
+					   
+					}
+					
+					if(rec.text =="全部")
+					{
+						$('#threeDiv').hide();
+						$('#twoDiv').hide();
+					}
+					
+					knowledge_point =rec.id;
+					load_data();
+									
+				}
+			});
+			$("#practiseType").combobox("loadData",practiseType);
+			
+			$('#practiseFatherNumber').combobox({
+				valueField:'id',
+				textField:'text',
+				onSelect: function(rec){
+					for(var i=0;i<arrayStore.length;i++)
+					{
+						$('#practiseChildrenNumber').combobox("setValue","");
+							if($("#practiseType").combobox("getValue") ==arrayStore[i].id)
+							   {
+							     var childrens =  arrayStore[i].children;
+							     if( childrens==undefined)
+					    		  {
+							    	 $('#practiseChildrenNumber').combobox("loadData",[]);
+					    		  }else{
+					    			  for(var k=0;k<childrens.length;k++)
+					    				{
+				    				        if((rec.id+"") == (childrens[k].id+""))
+				    				        	{
+				    				        	    if(childrens[k].children==undefined)
+				    				        	    	{
+				    				        	    	$("#threeDiv").hide();
+					    				        	    $('#practiseChildrenNumber').combobox("loadData",[]); 
+				    				        	    	}else{
+				    				        	    	    $('#threeDiv').show();
+						    				        	    $('#practiseChildrenNumber').combobox("loadData",childrens[k].children);
+				    				        	    	}
+				    				        	
+				    				        	}
+					    		}
+					    			  
+					    	}
+							   
+						}
+					}
+					
+					knowledge_point =rec.id;
+					load_data();
+				}
+			});
+			$('#practiseFatherNumber').combobox("loadData",practiseFatherNumber[0]);
+			
+			$('#practiseChildrenNumber').combobox({
+				valueField:'id',
+				textField:'text',
+				onSelect: function(rec){
+					knowledge_point =rec.id;
+					load_data();
+				}
+			});	
+			$('#practiseChildrenNumber').combobox("loadData",practiseChildrenNumber);
+			
+		}
+	});
+
+    load_data();
+
+    $('.q_next').click(function(){
+        page_next();
+        return false;
+    });
+
+    $('.q_pre').click(function(){
+        page_prev();
+        return false;
+    });
+	
+	
+	
+});	
+</script>
+

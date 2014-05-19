@@ -1,0 +1,222 @@
+/* CSS Document */
+@charset "utf-8";
+
+/*
+Name:教育评价系统2.0--公共框架-01
+Date:2014-05-07
+Author:lioc
+E-mail:chenliu2@iflytek.com
+*/
+
+/********************头部***/
+.epd_top_bar {
+    width:100%;
+    height:50px;
+    background:#4b6caa;
+}
+.epd_top_bar_con{
+    width:1000px;
+    height:50px;
+    margin:0 auto;
+}
+.epd_top_bar_logo{
+    display:block;
+    width:211px;
+    height:42px;
+    float:left;
+    padding-top:8px;
+}
+.epd_top_bar_menu{
+    width:520px;
+    height:50px;
+    float:left;
+    margin-left:20px;
+    overflow:hidden;
+}
+.epd_top_bar_menu li{
+    display:inline;
+    line-height:50px;
+    float:left;
+    margin:0 5px;
+}
+.epd_top_bar_menu li a{
+    display:block;
+    height:50px;
+    padding:0 15px;
+    color:#fff;
+    font-size:14px;
+    font-family:"Microsoft YaHei";
+}
+.epd_top_bar_menu li a:hover,.active_menu{
+    background:#374a6f;
+}
+.epd_top_bar_name{
+    height:22px;
+    padding-top:16px;
+    margin-right:20px;
+    float:right;
+    position:relative;
+}
+
+.epd_help_feedback{ float:right;  padding-top:16px; }
+
+.epdCopy_line{ background:url("../images/inno_hd_line.png") no-repeat scroll 0 0; width:2px; height:16px; display:inline-block;  margin-right:8px; vertical-align:middle; }
+.epdCopy_hd{ background:url("../images/inno_head.png") no-repeat scroll 0 -15px; width:15px; height:15px; display:inline-block;margin-right:10px; vertical-align:middle;}
+.epdCopy_arrows{background:url("../images/inno_arrow.png") no-repeat scroll right 0;height:15px; width:48px;display:inline-block;margin-right:12px;color:#b1c8e7; vertical-align:middle; cursor:pointer; position:relative;}
+.epdCopy_arrows:hover{
+    color:#fff;
+}
+.epd_feedback{ margin-right:8px;}
+.epd_help_feedback a{
+    color:#b1c8e7;
+    
+}
+.epd_help_feedback a:hover{
+    color:#fff;
+}
+.epdCopy_ar_con{
+	position: absolute;
+	top: 16px;
+	left: 0;
+	cursor: pointer;
+	display: block;
+	color: #b1c8e7;
+	background: #fff;
+	border: 1px solid #06C;
+	border-radius: 2px;
+	padding:0 6px;
+}
+.epdCopy_ar_con li{ text-align:center; inline-display:block; vertical-align:baseline; height:22px; min-width:28px; line-height:26px; white-space:nowrap; }
+.epdCopy_ar_con li:hover{ color:#333;}
+/********************内容部分*/
+.epd_main{
+    width:1000px;
+    margin:10px auto 0;
+    background:#e8ecf2 url("../images/epd_left_side.jpg") repeat-y;
+    border-top:1px solid #c2c2d3;
+    border-right:1px solid #c7c7c7;
+    border-bottom:1px solid #c7c7c7;
+}
+.epd_left_side{
+    width:177px;
+    height:500px;
+    float:left;
+}
+.epd_left_side dl{
+    width:177px;
+    font-family:"Microsoft YaHei";
+    font-size:14px;
+    margin-top:-1px ;
+	overflow:hidden;
+}
+.epd_left_side dl dt{
+    width:175px;
+    height:50px;
+    background:#e8ecf2;
+    border-top:1px solid #c1d3ef;
+    border-bottom:1px solid #c1d3ef;
+    margin-left:1px;
+}
+.epd_left_side dl dt a{
+    display:block;
+    width:145px;
+    height:50px;
+    padding-left:30px;
+}
+.epd_left_side dl dt a:hover{
+    background:#eff3f8;
+    color:#556583;
+}
+.epd_left_side dl dt a.epd_active_ls_dt{
+    color:#d8e5ff;
+    background:#4b6caa;
+}
+.epd_left_side dl dt a span{
+    display:inline-block;
+    width:112px;
+    height:50px;
+    line-height:50px;
+    float:left;
+    overflow:hidden;
+    cursor:pointer;
+}
+.epd_left_side dl dd{
+    width:175px;
+    height:30px;
+    margin-left:1px;
+    line-height:30px;
+}
+.epd_left_side dl dd a{
+    display:block;
+    padding-left:30px;
+    font-size:12px;
+    color:#61769e;
+}
+.epd_left_side dl dd a:hover,.epd_active_ls_dd{
+    color:#fff!important;
+    background:#819cce;
+    border-top:1px solid #6d85b3;
+    border-bottom:1px solid #6d85b3;
+}
+.epd_left_side dl dd a em{
+    display:inline-block;
+    width:4px;
+    height:4px;
+    margin-right:5px;
+    position:relative;
+    top:-3px;
+    *top:-6px; /*hack for IE7*/
+    background:url("../images/epd_left_side_ddem.png") 0 0;
+}
+.epd_left_side dl dd a:hover em,.epd_left_side dl dd a.epd_active_ls_dd em{
+    display:inline-block;
+    width:4px;
+    height:4px;
+    margin-right:5px;
+    position:relative;
+    top:-3px;
+    *top:-6px; /*hack for IE7*/
+    background:url("../images/epd_left_side_ddem.png") 0 -4px;
+}
+.epd_left_side dl dt a img,.epd_left_side dl dt a.epd_active_ls_dt img{
+    margin-right:20px;
+    position:relative;
+    float:right;
+    top:22px;
+}
+/********************右边内容*/
+.epd_right_con{
+    width:823px;
+    min-height:542px;
+    float:right;
+}
+.epd_screening{
+    width:100%;
+    height:23px;
+    padding:13px 0;
+    background:#eff1f6;
+    border-bottom:1px solid #c2c2d3;
+}
+.epd_screening span{
+    display:block;
+    height:23px;
+    float:right;
+    margin-right:20px;
+}
+/********************Footer*/
+.epd_footer{
+    width:100%;
+    height:49px;
+    border-top:1px solid #c4c4c4;
+    background:#fff;
+    margin-top:10px;
+}
+.epd_footer p{
+    width:1000px;
+    line-height:50px;
+    color:#999;
+    text-align:center;
+    margin:0 auto;
+}
+
+

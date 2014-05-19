@@ -1,0 +1,158 @@
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+<!-- 三方库 -->
+<script type="text/javascript" src="./js/flexpaper/flexpaper.js"></script>
+<script type="text/javascript" src="./js/flexpaper/flexpaper_handlers.js"></script>
+<!-- 弹出层-->
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+
+<!-- 页面 -->
+<script  src="./js/scaleLibrary/scaleIndex.js" type="text/javascript" ></script>
+<script src="./js/jquery/jquery.pagination.js" type="text/javascript"></script>
+<script src="./js/view_office.js" type="text/javascript"></script>
+<style type="text/css">
+
+#tab03 { width:30px;height:100px; margin-top:50px; }
+
+#tab03 h3 { position:relative; z-index:1;  padding-top:4px; margin-bottom:3px; border:solid #ccc; border-width:1px 0 1px 1px; text-align:center; font-family:宋体; background:#E0E0E0; cursor:pointer; }
+
+.fancybox-skin{
+    background-color:#B8B8B8!important;
+}
+.bright_cont_p{
+    height:90px;
+    overflow:hidden;
+}
+p.truncate a:hover {
+    color:#5c5c5c;
+    cursor: default;
+}
+#dd1{width:150px;
+    padding:2px 3px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+</style>
+
+<div class="cont_box fr" style="min-height: 590px;">
+    <div class="liangbsx" style="height:94px">
+        <dl>
+            <dt>学段：</dt>
+            <{foreach $scalePhase as $phase}>
+                <{if $phase_id == $phase.stu_sec_id}>
+                    <dd><a  style="display:block;background:#bcbcbc;color:#fff" class="" href="javascript:;" onclick="show('<{$phase.stu_sec_id}>')"><{$phase.stu_sec_name}></a></dd>
+                <{else}>
+                    <dd><a class="" href="javascript:;" onclick="show('<{$phase.stu_sec_id}>')"><{$phase.stu_sec_name}></a></dd>
+                <{/if}>
+            <{/foreach}>
+            <div class="clear"></div>
+        </dl>
+        <dl>
+            <dt>评价维度：</dt>
+            <{foreach $scaleDim as $dim}>
+                <{if $dimensions_id == $dim.dim_id}>
+                    <dd><a style="display:block;background:#bcbcbc;color:#fff" href="javascript:;" onclick="display('<{$dim.dim_id}>')"><{$dim.dim_name}></a></dd>
+                <{else}>
+                    <dd><a  href="javascript:;" onclick="display('<{$dim.dim_id}>')"><{$dim.dim_name}></a></dd>
+                <{/if}>
+
+            <{/foreach}>
+            <div class="clear"></div>
+        </dl>
+        <{if count($scaleTarget)>0}>
+            <dl>
+                <dt>评价指标：</dt>
+                <{foreach $scaleTarget as $target}>
+                    <{if $target.target_id == $target_id}>
+                        <dd><a style="display:block;background:#bcbcbc;color:#fff"  href="javascript:;" onclick="targe('<{$target.target_id}>')"><{$target.target_name}></a></dd>
+                    <{else}>
+                        <dd><a href="javascript:;" onclick="targe('<{$target.target_id}>')"><{$target.target_name}></a></dd>
+                    <{/if}>
+                <{/foreach}>
+                <div class="clear"></div>
+            </dl>
+
+        <{/if}>
+
+
+    </div>
+
+    <div class="ceping">
+       <h4>测评方式：</h4>
+       <ol>
+           <{foreach $scaleType as $type}>
+               <{if $type_id == $type.type_id}>
+                   <li  class="mail mail_on" onclick="typeDis('<{$type.type_id}>')"><{$type.type_name}></li>
+               <{else}>
+                    <li  class="mail" onclick="typeDis('<{$type.type_id}>')"><{$type.type_name}></li>
+               <{/if}>
+           <{/foreach}>
+       </ol>
+       <div class="clear"></div>
+    </div>
+    <div id="sent_mail1" >
+        <{foreach $data as $scale }>
+            <div class="cep_cont">
+                <h5><em class="fr">录入时间：<{$scale.testTime}></em><b><{$scale.testNum}></b><{$scale.testName}><font>使用次数：<{$scale.useNum}>次</font></h5>
+                <div class="entrust_bluebg">
+                    <p><img src="./images/pic_new.png" width="120" height="130" /></p>
+                    <dl class="fl">
+                        <dt><b>评价维度：</b><{$scale.dimensionsName}></dt>
+                        <dd><b>评价指标：</b><{$scale.targetName}></dd>
+                        <dd id="dd1" title="<{$scale.phaseName}>"><b>适用学段：</b><{$scale.phaseName}></dd>
+                        <dd><b>测评方式：</b><{$scale.typeName}></dd>
+                        <dd><b>题目数量：</b><{$scale.topicNum}></dd>
+                    </dl>
+                    <div class="bright_cont_right fl">
+                        <div class="bright_cont_p">
+                            <b>简介：</b>
+                            <p style="width:auto;" class="truncate" title="<{$scale.testIntro}>"><{$scale.testIntro}></p>
+
+                        </div>
+                        <div class="btn_cp">
+                            <input  name="" type="button"  id="task_button" class="btn_fb" onclick="view_office('<{$scale.scale_url}>','0','<{$scale.testName}>','<{$scale.testNum}>','<{$scale.scale_anw_url}>');" value="预览" href="#demo"/>
+                            <input  name="" type="button" onclick="downfile('./resource/doc/<{$scale.download_name}>');"  value="下载"/>
+                            <input class="bty_btn" type="button" onclick="fqpc('<{$scale.id}>');" value="发起测评"/>
+                        </div>
+
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+
+
+            </div>
+        <{/foreach}>
+    </div>
+    <input id="phaseId" type="hidden" value="<{$phase_id}>"/>
+    <input id="dimId" type="hidden" value="<{$dimensions_id}>"/>
+    <input id="targetId" type="hidden" value="<{$target_id}>"/>
+    <input id="typeId" type="hidden" value="<{$type_id}>"/>
+    <input id="data" type="hidden" value=""/>
+    <{include file="comm/pager.html"}>
+</div>
+<div id="demo" style="display:none;width:1000px;height:100px;">
+    <div id="tab01" style="padding-left:110px;padding-top:30px;padding-bottom:30px;font-size:30px"></div>
+    <div id="tab03" style="float:left;padding-left:80px;font-size:15px">
+    </div>
+    <div id="preview" style="float:left;width:80%;"></div>
+</div>
+

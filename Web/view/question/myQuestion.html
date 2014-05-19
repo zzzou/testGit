@@ -1,0 +1,81 @@
+<style>
+    .paging { text-align: center; }
+    .paging .pagination { display: inline-block; }
+</style>
+<script src="./js/question/myQuestion.js" type="text/javascript"></script>
+<div id="exam_tables" style="padding: 10px;">
+    <div class="papercontent" id="papercontent" style="position: relative;">
+        <div class="pf pg" style="z-index: 9999;">
+            <a href="#" class="prev">&nbsp;</a>
+             第<b><{$pageIndex}></b>/<{$pageCount}>页
+            <a href="#" class="next">&nbsp;</a>
+            共<b style="color: red;" id="count"><{$count}></b>题
+            <span style="margin-left: 40px; font-weight: bold; font-size: 14px; color: red">提示：只有标定过才能被收藏,加入试题篮或加入学校题库</span>
+            <input type="hidden" name="pageIndex" value="1"/>
+        </div>
+        <div class="fenye" style="margin: 0 0 10px 0; text-align: right;">
+            <a href="index.php?c=question&a=create" class="color_title ques_add" style="color: #fff;">添加</a>
+            <a href="#" class="color_title select_all" style="color: #fff;">全部加入试题篮</a>
+            <a href="#" class="color_title signAll" style="color: #fff;">批量标定</a>
+        </div>
+        <{foreach item=item from=$data}>
+            <div class="tiku" style="margin: 0; padding: 10px;" data-paperid="71072" data-quesid="axy3acgjf7hofz1bl9gj7q" data-img='http%3a%2f%2fimg.yixuexiao.cn%2fgroup1%2fM00%2f1D%2fA3%2fwKgAvFMDNWaAVlMkAAD90drXcug523.png' data-typeid="8" data-typename='现代文阅读' data-diffname='一般'>
+                <div class="tiku_title" style="background: none; padding-left: 0;">
+                    <div class="common_title">
+                        <input type="checkbox" value="<{$item.Id}>" style="float: left; height: 25px; line-height: 25px; margin-right: 8px;">
+                        <input type="hidden" name="ids" class="ids" value="">
+                        <span class="common_title_n">题号：<{$item.SourceId}>&nbsp;</span>
+                        <span class="common_title_m">题型：<{$item.CategoryId}></span>&nbsp;&nbsp;
+                        <span class="common_title_m">难度：<{$item.DiffId}>&nbsp</span>
+                        <span class="common_title_m">日期：<{$item.DateCreated}></span>
+                        <span class="common_title_m">使用次数：<{$item.RefCount}></span>
+                    </div>
+                    <div class="common_title">
+                        <span class="common_title_n">试题来源：引用于学校题库</span>
+                    </div>
+                    <div class="yichu" style="width: 372px; text-align: right;">
+                        <input type="hidden" class="remove" />
+                        <span>
+                            <a href="index.php?c=question&a=edit&id=<{$item.Id}>" class="color_title edit" style="color: #fff;">修改</a>
+                        </span>
+                        <span>
+                            <a onclick="return confirm('你确定删除吗')" href="index.php?c=question&a=delete&id=<{$item.Id}>" data-id="axy3acgjf7hofz1bl9gj7q" class="color_title delete" style="color: #fff;">删除</a>
+                        </span>
+                        <{if $item.IsSigned!=1}>
+                            <span>
+                                <a href="index.php?c=question&a=calibration&id=<{$item.Id}>" data-id="axy3acgjf7hofz1bl9gj7q" class="color_title sign" style="color: #fff;" enabled="1">标定</a>
+                            </span>
+                        <{/if}>
+                    </div>
+                </div>
+                <div class="tiku_content" style="width:750px;">
+                    <{$item.Body}>
+                </div>
+                <div class="answer hide" >
+                    <div class="tiku_content" style="width:750px;">
+                        <{$item.Answer}>
+                    </div>
+                    <div class="tiku_content" style="width:750px;">
+                        <{$item.Parse}>
+                    </div>
+                </div>
+            </div>
+        <{/foreach}>
+        <div id="ReasonDialog"></div>
+    </div>
+    <{if $count!=0}>
+        <div class="paging">
+            <span style="display: inline-block;">
+                <a href="javascript:;" class="go" >跳转到</a>
+                <input name="go" value="" class="ui-widget-content ui-corner-all" style="width: 40px;">页
+            </span>
+            <div id="Pagination" class="pagination" style="margin-bottom:-15px;">
+            </div>
+        </div>
+    <{else}>
+         <div class=" cc" style="padding: 10px;">
+                没有找到相关题目
+         </div>
+    <{/if}>
+</div>
+   

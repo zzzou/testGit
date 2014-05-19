@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "sebastian/phpcpd": "*",
+        "sebastian/phpdcd": "*",
+        "phpmd/phpmd" : "1.4.*",
+        "phploc/phploc": "*",
+        "squizlabs/php_codesniffer": "1.*",
+        "theseer/phpdox": "*"
+    }
+}

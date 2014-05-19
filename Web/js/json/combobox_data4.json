@@ -1,0 +1,26 @@
+﻿[{
+	"id":9,
+	"text":"请选择年级",
+	"selected":true,
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},
+{
+	"id":1,
+	"text":"1班",
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},
+{
+	"id":2,
+	"text":"2班",
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},
+{
+	"id":3,
+	"text":"3班",
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},
+{
+	"id":4,
+	"text":"4班",
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+}]

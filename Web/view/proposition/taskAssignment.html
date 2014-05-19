@@ -1,0 +1,157 @@
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+<link href="./css/lioc.css" rel="stylesheet" type="text/css" />
+<link href="./css/first.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="./js/jquery/jquery.panel.js" ></script>
+<script type="text/javascript" src="./js/jquery/jquery.form.js"></script>
+<script type="text/javascript" src="js/proposition/taskAssignment.js"></script>
+<script type="text/javascript" src="js/proposition/toggle.js"></script>
+
+<style type="text/css">
+.combo-arrow {
+    background: url("images/combo_arrow_my.png")
+	no-repeat scroll center center rgba(0, 0, 0, 0);
+}
+
+.combo {
+    border-color: #BBBBBB;
+}
+.shenhe_bg {
+    background: none repeat scroll 0 0 #E4E3E3;
+}
+
+.panel-body {
+    border-width: 0;
+}
+
+.panel-header, .panel-body {
+    border-width: 0px;
+}
+
+.panel-header {
+    background: linear-gradient(to bottom, #E4E3E3 0px, #E4E3E3 100%) repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.datagrid-header, .datagrid-td-rownumber {
+	background: #666;
+	color: #fff;
+}
+
+.tr_bg {
+	background: #666;
+	color: #fff;
+}
+
+.pop_layer {
+	font-size: 12px;
+	outline: none;
+	width: 100%;
+	min-height: 100%;
+	position: absolute;
+	z-index: 7000;
+	top: 0;
+	left: 0;
+	padding: 16px 0px;
+	background: rgba(0,0,0,.9);
+}
+
+ .datagrid-header-row td	.datagrid-cell{
+    color:#FCF4F4
+	}
+</style>
+
+<div class="newTabCR">
+	<div class="cont_box fr">
+		<div  id="u93">命题情况</div>
+		<div style="margin-top: 40px;"></div>
+		<table id="dg"></table>
+ 		<div style="margin-top: 10px;"></div>
+		<div  id="u93" style="position: relative;">命题分配</div>
+		<!-- <div style="margin-top: 40px;"></div> -->
+		<div style="height: 160px;overflow: auto;">
+			<table id="dg2"></table>
+		</div>
+		<div class="input_btn" style="width: 300px;">
+			<form id="save" action="index.php?c=proposition&a=saveAssignment&id=<{$id}>" method="post">
+			    <input type="hidden" id="jsonData" name ="data" />
+				<input type="button" value="上一步" onclick="location.href='index.php?c=proposition&amp;a=taskProcessing&amp;id=<{$id}>'" />
+				<input type="button" class="ajax_save" value="保存" />
+				<input type="button" class="task_click" value="任务发布"  />
+				<div class="mtbc" style="display:none">命题任务已保存</div>
+			</form>
+		</div>
+		<div id="win">
+        	<div style="height: 250px;overflow: auto;">
+            	<ul id="tt"></ul>
+            </div>
+			<a class="easyui-linkbutton"  href="javascript:void(0)" id="addBtn" >添加</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div class="pop_layer" style="display:none">
+	<div class="rwfp_fb_box">
+		<h3><span>命题信息</span><input type="button" value="关闭" onclick="$('.pop_layer').hide();"></h3>
+		<div class="rwfp_mtxx_con">
+			<ul>
+				<li><label>任务名称：</label><span><{$preview.name}></span></li>
+				<li style="width:50%;"><label>任务提交期限：</label><span><{$preview.organize_start_time|date_format:'%Y-%m-%d'}>~<{$preview.organize_end_time|date_format:'%Y-%m-%d'}> </span></li>
+				<li style="width:50%;"><label>命题截止期限：</label><span><{$preview.topic_time|date_format:'%Y-%m-%d'}></span></li>
+				<li style="width:50%;"><label>学段：</label><span><{$preview.study_section}></span></li>
+				<li style="width:50%;"><label>考试时长：</label><span><{$preview.exam_time}></span></li>
+				<li style="width:50%;"><label>科目：</label><span><{$preview.subject}></span></li>
+				<li style="width:50%;"><label>考试类型：</label><span><{$preview.type}></span></li>
+				<li style="width:50%;"><label>考试对象：</label><span><{$preview.object}></span></li>
+				<li style="width:50%;"><label>试卷满分：</label><span><{$preview.score}></span></li>
+				<li><label>试卷难度：</label><span><{$preview.difficulty}></span></li>
+				<li><label>题量：</label><span><{$count}></>题</span></li>
+				<li><label>题型：</label><span><{$topicType}></span></li>
+				<li><label>命题教师：</label><span><{$preview.assign_teachers}></span></li>
+				<li>
+					<label>教材信息：</label>
+					<div class="ifo_con">
+						<p class="ifo_con_tit"><a href="#"  onclick="changeHeight(this);return false;">展开</a></p>
+						<div class="ifo_con_text">
+						    <{foreach item=item from=$textbooks}>
+							<p><{$item}></p>
+							<{/foreach}>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<label>知识点信息：</label>
+					<div class="ifo_con">
+						<p class="ifo_con_tit"><a href="#" onclick="changeHeight(this);return false;">展开</a></p>
+						<div class="ifo_con_text">
+						   <{foreach item=item from=$knowledge}>
+							<p><{$item}></p>
+							<{/foreach}>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<h3><span>命题分配信息</span></h3>
+		<div class="mtfp_ifo">
+			<table class="mtqk_table_t" cellspacing="1" cellpadding="0">
+				<tbody>
+					<tr class="frist_tr">
+						<th>命题人</th>
+						<th>分配题型</th>
+						<th>分配命题数</th>
+						<th>分配占比（分配/总题数）</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="btn_right_con mrb20">
+			<input type="button" value="确认并发布任务" onclick="location.href='index.php?c=proposition&amp;a=myTask&amp;state=2&amp;id=<{$id}>'">
+		</div>
+	</div>
+</div>
+
+<span id="sendId" style="display: none;" ><{$id}></span>
+

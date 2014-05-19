@@ -1,0 +1,495 @@
+.newTabContent {
+    width: 1000px;
+    min-height: 500px;
+    margin: 0 auto;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 16px;
+    background: url(../images/autoHeight.png) repeat-y scroll left 0;
+}
+
+.newTabCL {
+    width: 230px;
+    float: left;
+    border-top: 1px solid #ccc;
+    min-height: 500px;
+    background: #f6f6f6;
+}
+
+.newTabCLTit {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    /*background: url(../images/newTabCLTitl.png) no-repeat scroll 20px center; */
+}
+
+.noneBg {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    /*background: url(../images/newTabCLTitl.png) no-repeat scroll 20px center;*/
+}
+
+.noneBg a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: none;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCLTit a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: url(../images/newTabCLTit1.png) no-repeat scroll 199px -51px #f6f6f6;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCLTit a.on {
+    background-position: 199px 0px;
+}
+
+.newTabCL dl {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.newTabCL dl a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCL a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCL dl dd {
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    background: #fff;
+}
+
+.newTabCL dl dd a {
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #666;
+    display: block;
+    width: 230px;
+    height: 42px;
+    line-height: 42px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.newTabCL dl dd a:hover {
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    width: 230px;
+    height: 42px;
+    background: #44a3df;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.newTabCL dl dd a.newTabCLTit_cur {
+    display: block;
+    width: 230px;
+    height: 42px;
+    background: #44a3df;
+    color: #fff;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.newTabCL dl dd a.newTabCLTit_last {
+    height: 42px;
+    line-height: 50px;
+}
+
+.newTabCLTit_quality {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    background: url(../images/newTabCLTit_quality.png) no-repeat scroll 20px center;
+}
+
+.newTabCLTit_quality a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: url(../images/newTabCLTit1.png) no-repeat scroll 199px -51px;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCLTit_star {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    background: url(../images/newTabCLTit_star.png) no-repeat scroll 20px center;
+}
+
+.newTabCLTit_star a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: url(../images/newTabCLTit1.png) no-repeat scroll 199px -51px;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCLTit_plan {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    background: url(../images/newTabCLTit_plan.png) no-repeat scroll 20px center;
+}
+
+.newTabCLTit_plan a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: url(../images/newTabCLTit1.png) no-repeat scroll 199px -51px;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCLTit_pen {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    background: url(../images/newTabCLTit_pen.png) no-repeat scroll 20px center;
+}
+
+.newTabCLTit_pen a {
+    display: inline-block;
+    width: 230px;
+    height: 51px;
+    background: url(../images/newTabCLTit1.png) no-repeat scroll 199px -51px;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCR {
+    width: 768px;
+    background: #fff;
+    min-height: 500px;
+    border-top:1px solid #ccc;
+    float: right;
+}
+
+.newTabCR_con {
+    width: 768px;
+    background: #fff;
+    padding: 24px 0 0 0;
+    margin: 0 0 35px 0;
+}
+
+.checkRptR_top {
+    height: 51px;
+    background: #fafafa;
+    border-bottom: 1px solid #ccc;
+    width: 768px;
+    position: relative;
+}
+
+.newTabCR_conTit {
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    color: #333;
+    padding: 0 0 0 42px;
+    background: url(../images/newTabCRtop.png) no-repeat scroll 18px center;
+    margin: 0 0 20px 0;
+    width: 727px;
+}
+
+.newTabCR_conBgCon {
+    width: 688px;
+    margin: 0 auto;
+}
+
+.newTabCR_conBgT {
+    width: 688px;
+    height: 1px;
+    background: url(../images/newTabCR_conBgT.png) no-repeat scroll 0 0;
+}
+
+.newTabCR_conBgB {
+    width: 688px;
+    height: 4px;
+    background: url(../images/newTabCR_conBgB.png) no-repeat scroll 0 0;
+}
+
+.newTabCR_conBgC {
+    width: 658px;
+    background: url(../images/newTabCR_conBgC.png) repeat-y scroll 0 0;
+    padding: 16px 15px;
+    text-indent: 24px;
+    word-wrap: break-word;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+}
+
+.newTabCR_result {
+    padding: 0 0 24px 0;
+}
+
+.newTabCR_resCon {
+    margin: 0 auto;
+    width: 688px;
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.newTabCR_resCon_tit {
+    border: 1px solid #dcdcdc;
+    background: #f9f9f9;
+    height: 47px;
+    line-height: 47px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    margin: 3px auto;
+    margin-bottom: 0px;
+    width: 688px;
+}
+
+.newTabCR_resCon_tit1 {
+    float: left;
+    width: 45px;
+    height: 47px;
+    text-align: center;
+    border-right: 1px solid #eaeaea;
+}
+
+.newTabCR_resCon_titTim {
+    float: left;
+    padding: 0 0 0 13px;
+}
+
+.newTabCR_resCon_titrpo {
+    float: right;
+    margin: 0 17px 0 0;
+}
+
+.newTabCR_resCon_tit a.newTabCR_resCon_titdwn {
+    float: right;
+    padding: 0 22px 0 0;
+}
+
+.newTabCR_resCon_tit a {
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+.newTabCR_resCon_cur {
+    position: absolute;
+    top: 38px;
+    right: 32px;
+    display: inline-block;
+    width: 30px;
+    height: 10px;
+    background: url(../images/newTabCR_resCon_titdwn.png) no-repeat scroll 0 0;
+}
+
+.newTabCR_resCon_table {
+    font-family: "Microsoft YaHei";
+    font-size: 17px;
+    color: #474747;
+    height: 51px;
+    line-height: 51px;
+    padding: 0 0 0 23px;
+    width: 665px;
+}
+
+.newTabCR_resCon_pointT {
+    width: 463px;
+    height: 10px;
+    background: url(../images/newTabCR_resCon_pointT.png) no-repeat scroll 0 0;
+}
+
+.newTabCR_resCon_pointB {
+    width: 463px;
+    height: 10px;
+    background: url(../images/newTabCR_resCon_pointB.png) no-repeat scroll 0 0;
+}
+
+.newTabCR_resCon_pointtab {
+    width: 463px;
+    margin: 0 auto;
+}
+
+.newTabCR_resCon_pointC {
+    width: 463px;
+    heihgt: auto;
+    background: url(../images/newTabCR_resCon_pointC.png) repeat-y scroll 0 0;
+}
+
+.newTabCR_resCon_pointCL {
+    float: left;
+    margin: 20px 0 0 94px;
+    height: 80px;
+}
+
+.newTabCR_resCon_pointCL span {
+    width: 103px;
+    height: 49px;
+    display: inline-block;
+    background: url(../images/newTabCR_resCon_pointCl.png) no-repeat scroll 0 0;
+    font-family: "Microsoft YaHei";
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+}
+
+.newTabCR_resCon_pointCL p {
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #474747;
+    text-align: center;
+    width: 103px;
+    line-height: 27px;
+}
+
+.newTabCR_resCon_pointCR {
+    float: left;
+    margin: 20px 0 0 57px;
+    height: 80px;
+}
+
+.newTabCR_resCon_pointCR span {
+    width: 103px;
+    height: 49px;
+    display: inline-block;
+    background: url(../images/newTabCR_resCon_pointCl.png) no-repeat scroll 0 -49px;
+    font-family: "Microsoft YaHei";
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+}
+
+.newTabCR_resCon_pointCR p {
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #474747;
+    text-align: center;
+    width: 103px;
+    line-height: 27px;
+}
+
+.newTabCR_resCon_rank {
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    height: 54px;
+    line-height: 54px;
+}
+
+.newTabCR_resCon_tab {
+    width: 463px;
+    margin: 0 auto 33px auto;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #858585;
+    border-top: 1px solid #c3d1d0;
+    border-left: 1px solid #c3d1d0;
+}
+
+.newTabCR_resCon_tab tr td {
+    border-bottom: 1px solid #c3d1d0;
+    border-right: 1px solid #c3d1d0;
+}
+
+.newTabCR_resCon_tabtr1 {
+    background: #ddf0ee;
+    height: 38px;
+}
+
+.newTabCR_resCon_explain {
+    height: 28px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #474747;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    margin: 0 auto 13px auto;
+    width: 638px;
+}
+
+.newTabCR_resCon_explainCon {
+    margin: 0 auto 32px auto;
+    width: 638px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #858585;
+}
+
+.newTabCR_resCon_explainCon p {
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.newTabCR_resCon_con {
+    overflow: hidden;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.newTab_footer {
+    width: 100%;
+    height: 68px;
+    border-top: 1px solid #dcdcdc;
+    background: #f0f0f0;
+    text-align: center;
+    line-height: 68px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #666;
+}

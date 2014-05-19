@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="css/chosen.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/zTreeStyle.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/topic_base.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/Testlibrary.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/jquery.pnotify.default.css" type="text/css" media="all" />
+<link id='azb_theme' rel='stylesheet' href='css/skin_green.css' type='text/css'/>
+<link rel='stylesheet' href='css/gForm.css'  type='text/css'/>
+<script type="text/javascript" src="js/jquery/jquery.pagination.js"></script>
+<script src='js/jquery/chosen.js' type='text/javascript'></script>
+<script src='js/jquery/jquery.ztree.core-3.5.js' type='text/javascript'></script>
+<script src='js/jquery/jquery.ztree.excheck-3.5.js' type='text/javascript'></script>
+<script src='js/jquery/gForm.js' type='text/javascript'></script>
+<script src='js/ques_index.js' type='text/javascript'></script>
+<script src='js/jquery/jquery.form.js' type='text/javascript'></script>
+<script src='js/jquery/jquery.pnotify.min.js' type='text/javascript'></script>
+<script src='js/topic_common.js' type='text/javascript'></script>
+<script src="./js/question/index.js" type="text/javascript"></script>
+<style>
+    .audit { font-size: 15px; color: red; font-weight: bold;}
+</style>
+
+<style>
+    .left_wrapper ul li a { display: block; background: url(img/dian_03.png) no-repeat 0px 2px; padding-left: 15px; }
+    .fn-left { border-right: 1px solid #B8B8B8; }
+
+</style>
+
+<div class="epd_right_con" style="background-color: white">
+	<div id="exam_tabs" data-vp="/">
+        <form id="exam_form" action="index.php?c=question&a=myQuestion" method="POST" class="gform full">
+            <input type="hidden" id="page_current" name="page" />
+            <div class="fn-left_title_zn_sx" style="position: relative;">
+                <span class="pl">
+                    <a href="#" class="cur">高中语文</a>
+		            <span class="genghuanjiegou">更换结构</span>
+		            <span class="clear" style="font-size: 12px; position: absolute; display: none; cursor: pointer; right: 0; top: 0;">×</span>
+                </span>
+                <div class="productBox" style="display: none;">
+                    <div class="proCon border1">
+                        <dl class="pro">
+                            <dt><a class="bluel" style="padding-left: 0">高中</a></dt>
+                            <dd>
+                                <a class="kj" href="#" data-id="10" data-cate="0" title="高中语文" style="position: relative;">
+                                    <input type="checkbox" name="bankId" value="10" disabled="disabled" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>语文</span>
+                                </a>
+                                <a class="" href="#" data-id="11" data-cate="0" title="高中数学" style="position: relative;">                            <input type="checkbox" name="bankId" value="11" disabled="disabled" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>数学</span>
+                                </a>
+                                <a class="" href="#" data-id="12" data-cate="0" title="高中英语" style="position: relative;">                            <input type="checkbox" name="bankId" value="12" disabled="disabled" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>英语</span>
+                                </a>
+                                <a class="" href="#" data-id="13" data-cate="1" title="高中物理" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="13" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>物理</span>
+                                </a>
+                                <a class="" href="#" data-id="14" data-cate="1" title="高中化学" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="14" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>化学</span>
+                                </a>
+                                <a class="" href="#" data-id="15" data-cate="1" title="高中生物" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="15" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>生物</span>
+                                </a>
+                                <a class="" href="#" data-id="16" data-cate="2" title="高中政治" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="16" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>政治</span>
+                                </a>
+                                <a class="" href="#" data-id="17" data-cate="2" title="高中历史" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="17" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>历史</span>
+                                </a>
+                                <a class="" href="#" data-id="18" data-cate="2" title="高中地理" style="position: relative;">                                                                    <input type="checkbox" name="bankId" value="18" style="position: absolute; left: 0px; top: 6px;" />
+                                    <span>地理</span>
+                                </a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="xkmh">
+                <dl class="fore">
+                    <dd>题型：<a href="#" class="color_title">全部</a>
+                    <{foreach item=item from=$cate}>
+                     | <a href="#" data-name="<{$item.Name}>"><{$item.Title}></a>
+                    <{/foreach}>
+                    <input type="hidden" name="cate_id" />
+                    </dd>
+                </dl>
+                <dl class="fore">
+                    <dd>标定：<a href="#" class="color_title">全部</a>
+                        | <a href="#" data-name="0">未标定</a>
+                        | <a href="#" data-name="1">已标定</a>
+                        <input type="hidden" name="IsSigned" />
+                    </dd>
+                </dl>
+                <dl class="fore">
+                    <dd>难度：<a href="#" class="color_title">全部</a>
+                    <{foreach item=item from=$diff}>
+                      | <a href="#" data-name="<{$item.Name}>"><{$item.Title}></a>
+                     <{/foreach}>
+                     <input type="hidden" name="diff_id" />
+                    </dd>
+                </dl>
+                <dl class="fore zohe">
+                    <dd>年级：<a href="#" class="color_title">全部</a>
+                        <{foreach item=item from=$grade}>
+                        | <a href="#" data-name="<{$item.Name}>"><{$item.Title}></a>
+                        <{/foreach}>
+                        <input type="hidden" name="grade_id" />
+                        <input type="hidden" name="CategoryId" value='' id="CategoryId_hidden" />
+                        <input type="hidden" name="KnowledgeId" id="KnowledgeId_hidden" />
+                        <input type="hidden" id="userid" value="7oogamcif4rb5xjyuleafg"/>
+                    </dd>
+                </dl>
+            </div>
+            <{include file="question/myQuestion.html"}>
+        </form>
+    </div>
+    <div class="gloading" style="position: absolute;right:600px;top:260px;background:none;">
+        <img src="./images/load.gif" />
+    </div>
+    <div id="list-group"></div>
+</div>
+
+
+
+ 
+    

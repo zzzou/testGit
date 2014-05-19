@@ -1,0 +1,83 @@
+              #u122_img {
+			height: 30px;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 750px;
+		}
+		#u122 {
+			text-align: left;
+		}
+		.ax_sharp {
+			color: #333333;
+			font-family: 'Arial Normal','Arial';
+			font-size: 13px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: normal;
+			text-align: center;
+		}
+
+		#u123 {
+			left: 2px;
+			position: absolute;
+			top: 0px;
+			width: 746px;
+			word-wrap: break-word;
+		}
+
+		.ax_text {
+			color: #333333;
+			font-family: 'Arial Normal','Arial';
+			font-size: 13px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: normal;
+			text-align: left;
+			font-size: 14px;
+		}
+
+		.ax_save {
+
+			font-family: 'Arial Normal','Arial';
+			font-size: 13px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: normal;
+			text-align: left;
+			font-size: 14px;
+                        cursor: pointer;
+                        
+		}
+
+		#u197 {
+			height: 25px;
+			position: absolute;
+			text-align: center;
+			width: 150px;
+		}
+
+
+		#u198 {
+			left: 0;
+			position: absolute;
+			top: 0px;
+			width: 180px;
+			word-wrap: break-word;
+		}
+		
+		#u93 {
+		    font-size: 18px;
+		    left: 20;
+		    position: absolute;
+		    top: 5;
+		    font-weight:400;
+		    width: 100px;
+		    word-wrap: break-word;
+		}
+		
+       .demo{width:80%; margin:2px auto}
+      .demo h3{height:32px; line-height:32px}
+      .demo p{line-height:24px}
+      .demo h2{float:right;margin:20px auto}
+       pre{margin-top:10px; padding:6px; background:#f7f7f7}

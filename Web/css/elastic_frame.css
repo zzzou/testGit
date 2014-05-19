@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+
+.report_elastic_frame{
+    width:698px;
+    padding:10px 0;
+    border:1px solid #ccc;
+}
+.elastic_frame_tips{
+    padding:20px 30px;
+    background:#f2f2f2;
+    position:relative;
+}
+.close_tips{
+    display:block;
+    width:20px;
+    height:20px;
+    background:url("../images/bg_closed.png") no-repeat;
+    position:absolute;
+    top:10px;
+    left:668px;
+}
+.close_tips:hover{
+    background-position:0 -20px;
+}
+.elastic_frame_tips p{
+    line-height:26px;
+}
+.fonts{
+    font-size:26px;
+}
+.elastic_frame_con{
+    padding:20px;
+}
+.elastic_frame_table{
+    width:500px;
+}
+.mrt100{
+    margin-top:100px;
+}

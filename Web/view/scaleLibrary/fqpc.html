@@ -1,0 +1,175 @@
+
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="./js/flexpaper/flexpaper.js"></script>
+<script type="text/javascript" src="./js/flexpaper/flexpaper_handlers.js"></script>
+<!-- 弹出层-->
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+
+<!-- 页面 -->
+<script type="text/javascript" src="./js/scaleLibrary/fqpc.js" ></script>
+<script type="text/javascript" src="js/view_office.js" ></script>
+<style type="text/css">
+#tab03 { width:30px;height:100px; margin-top:50px; } 
+
+#tab03 h3 { position:relative; z-index:1;  padding-top:4px; margin-bottom:3px; border:solid #ccc; border-width:1px 0 1px 1px; text-align:center; font-family:宋体; background:#E0E0E0; cursor:pointer; } 
+
+.fancybox-skin{
+    background-color:#B8B8B8!important;
+}
+
+.onError {
+    background: #FFF2E9 url(./images/onError.gif) no-repeat;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 22px;
+    vertical-align: middle;
+}
+		
+</style>
+  <!--发起评测开始-->
+<div class="cont_box fr">
+    <form
+    action="index.php?c=scale&a=saveAssessment&id=<{$proposition.id}>"
+    method="post" id="proposition_form">
+        <div class="location">
+            <a href="#">命题任务</a> &gt;
+            <a href="#"> 编辑任务</a>
+        </div>
+        <h3>发起测评</h3>
+        <div class="faqcp">
+            <p>测评维度：
+                <font class="fqcp_cpwd">
+      			    <{$scaleArray['0'].dimensionsName}>
+      			</font>
+            </p>
+            <p>测评指标：
+                <font class="fqcp_cpzb">
+      			    <{$scaleArray['0'].targetName}>
+      			</font>
+            </p>
+            <p>
+                <strong class="fl">使用量表：</strong>
+                <div class="faqcp_lianb fl">
+      	            <a href="#demo" id ="yl" class="fr"
+      			    onclick="view_office('<{$scaleArray['0'].scale_url}>','0','<{$scaleArray['0'].testName}>','<{$scaleArray['0'].testNum}>','<{$scaleArray['0'].scale_anw_url}>')">
+      			    预览量表</a>
+      	            <font class="fqcp_lbmc">
+      			        <font >
+                            <b id="testNum"><{$scaleArray['0'].testNum}></b>
+                        </font>
+                        <font id="testName"><{$scaleArray['0'].testName}>
+                        </font>
+      	            </font>
+                </div>
+                <div class="=clear"></div>
+            </p>
+            <ul>
+              <li>适用学段：<{$scaleArray['0'].phaseName}></li>
+              <li> 测评方式：<{$scaleArray['0'].typeName}></li>
+              <li> 题目数量：<{$scaleArray['0'].topicNum}></li>
+              <div class="clear"></div>
+            </ul>
+        </div>
+
+        <!--弹出层-->
+        <div id="demo" style="display:none;width:1000px;height:100px;">
+                <div id="tab01" style="padding-left:110px;padding-top:30px;padding-bottom:30px;font-size:30px"></div>
+                <div id="tab03" style="float:left;padding-left:80px;font-size:15px">
+                </div>
+                <div id="preview" style="float:left;width:80%;"></div>
+        </div>
+	    <!--弹出层结束-->
+        <div class="clear"></div>
+        <div class="fqcp_cp">
+            <ol>
+                <li>※测评名称：
+                    <input id="pcmc" style="background-color:#c5e9fe ;width:80%; line-height: 20px;text-align: center;font-size: 15px;"
+                      type="text" placeholder="请输入测评名称"  />
+                </li>
+                <li>※测评时间：
+                    <input name="start_time" id="begin_date"/>~
+                    <input name="end_time" id="end_date"/>
+                    <span class="onError" id="time_error" style="width:250px;margin-left:30px;display:none">请选择评测提交期限！</span>
+                </li>
+                <li>
+                    <font class="fl">※测评对象：</font>
+                    <div class="cpdx fl" id="allcheckbox">
+                      <{foreach item=gradeAll from=$grade}>
+                        <{foreach item=gradeMsg from=$gradeAll}>
+                            <div id="<{$gradeMsg['gradeLevel']}>">
+                                <dl>
+                                    <dt><{$gradeMsg.gradeLevel}></dt>
+                                    <dd>
+                                        <input id="<{$gradeMsg.gradeLevel}>grp1"  type="checkbox" onclick="selectGroup('<{$gradeMsg.gradeLevel}>','<{$gradeMsg.gradeLevel}>grp1')"  />
+              	                        全部
+                                    </dd>
+                                    <{foreach item=class from=$gradeMsg.class}>
+                                        <dd>
+                                            <input  name="check" onclick="uncheckGrp('<{$gradeMsg.gradeLevel}>grp1')" type="checkbox" value="<{$gradeMsg.gradeLevel}><{$class.className}>" />
+                                            <{$class.className}>
+                                        </dd>
+                                    <{/foreach}>
+                                    <div class="clear"></div>
+                                </dl>
+                            </div>
+                        <{/foreach}>
+                       <{/foreach}>
+                        <p>
+                            <input id="check_grp4" type="checkbox" onclick="selectGroup('allcheckbox','check_grp4')" />
+                            全部
+                        </p>
+                        <span class="onError" id="cpmc_error" style="width:250px;display:none">请输入测评名称 !</span>
+                        <span class="onError" id="cpdx_error" style="width:250px;display:none">请选择测评对象!</span>
+                        <font class="scaleId" style="display:none"><{$scale_id}></font>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ol>
+            <div class="btn_faqcp">
+                <input name="" type="button" id="fqcp" class="btn_fqcp" href="#gb1" value="发起测评"/>
+                <input name="" type="button" id="cpqx" value="取消"/>
+            </div>
+            <div class="fqcp_tc" style="display:none;" id="gb1" title="发起评测" >
+    	        <h6>是否确定发起测评任务？</h6>
+      	        <div class="wfb cptc_cont">
+                    <div class="wf_bg bg_ctb">
+                        <h5 class="fl"></h5>
+                    <div class="clear"></div>
+                </div>
+                <div class="wfb_cont"  id="js1" >
+                    <dl>
+                        <dd><span class="gb1_cpsj"></span></dd>
+                        <dd><span class="gb1_cpwd"></span></dd>
+                        <dd><span class="gb1_cpzb"></span></dd>
+                        <dd><span class="gb1_cpdx"></span></dd>
+                        <dd>提交时间：<span class="gb1_start_time"></span>~<span class="gb1_end_time"></span></dd>
+                        <dd><span class="gb1_sylb"></span></dd>
+                    </dl>
+                </div>
+                <div class="btn_faqcp tc_btnbg">
+                    <input id="save" type="submit" class="btn_fqcp"  value="确定"/>
+                    <input name="" type="button" value="取消" />
+                </div>
+            </div>
+        </div>
+    </div>
+ </form>
+</div>
+

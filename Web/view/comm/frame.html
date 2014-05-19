@@ -1,0 +1,47 @@
+<!--
+author:xhcao@iflytek.com
+uploadify上传视频的弹框
+-->
+<!-- 弹出层-->
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.mousewheel-3.0.6.min.js"></script>
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-buttons.js"></script>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="js/jquery/jquery.fancybox-thumbs.js"></script>
+
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="js/jquery/jquery.fancybox-media.js"></script>
+
+<!--    上传视频的js和css  -->
+<link href="./js/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./js/uploadify/jquery.uploadify.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/popLayer.css" />
+<link href="./css/frame.css" rel="stylesheet" type="text/css" />
+
+<!--  上传视频的配置文件  -->
+<script type="text/javascript " src="./js/uploadify/upload.js"></script>
+
+
+<div id="pop_layer" class="pop_layer" style="display:none;">
+    <div class="pop_layer_main" style="position:relative;width:1000px;height:680px;">
+        <div class="smlNavTop_warp">
+            <div class="smlNavTop">
+
+                <a id="lbtn_pop_layer_close2" href="javascript:;" class="smlNavTop_mateX">X</a>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <img    id="upload_file"   />
+
+    </div>
+</div>

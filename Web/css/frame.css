@@ -1,0 +1,40 @@
+/*
+author:xhcao
+uploadify视频弹框的样式
+*/
+
+.smlNavTop_warp{
+    width: 1000px;
+    margin: 0 auto;
+}
+.smlNavTop{
+    width: 1000px;
+    height: 41px;
+    line-height: 41px;
+    color: #fff;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    background:#3465a8;
+}
+.smlNavTop_mateX{
+    width: 24px;
+    height: 24px;
+    float:right;
+}
+.smlNavTop_mateX,.smlNavTop_mateX:hover{
+    display: inline-block;
+    width: 49px;
+    height: 40px;
+    background: url(../images/smlNavTop_mateX.png) no-repeat 0 0;
+    text-indent:-100px;
+    overflow:hidden;
+}
+.smlNavTop_mateX:hover{
+    background-position:0 -40px;
+}
+.pop_layer{background: none !important;}
+.pop_layer_main{width:500px !important;height:300px !important;top:200px;background: #dedede !important;}
+.smlNavTop_warp{width:500px !important}
+.smlNavTop{width:500px !important;}
+#upload_file{margin: 0 auto;top:50px;}
+#upload_file-queue{margin-top: 100px;margin-left: 65px;}

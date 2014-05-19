@@ -1,0 +1,279 @@
+<link href="css/lianb.css" rel="stylesheet" type="text/css" />
+<link href="css/proposition.css" rel="stylesheet" ="text/css" />
+
+<style type="text/css">
+ </style>
+
+<script type="text/javascript" src="./js/jquery/jquery.countdown.min.js"></script>
+
+	<!-- 页面 -->
+	
+	<script type="text/javascript">
+	$(function(){
+		$('.topic_end_time').each(function(i, e){
+			var $this = $(this);
+			var finalDate = $(this).text();
+			$this.countdown(finalDate, function(event) {
+				$this.html(event.strftime('<em>%d</em>天  <em>%H</em>小时 <em>%M<em>分钟'));
+			})
+		});
+	});
+	</script>
+
+
+		<div class="newTabCR">
+			<div class="cont_box fr l_cont_box">
+				<h3 class="title">我的任务</h3>
+
+				<{foreach item=proposition from=$propositions}>
+				<div class="wdrw_mt" style="background:#378d7d">
+					<div class="fl mm_title"><span style="color:white">命题组织任务</span></div>
+					<div class="yfb fr rw_bgcolor">
+						<h5>
+							<a href="#" onclick="$(this).parents('.yfb').find('.wfb_cont').toggle();return false;">详情</a>
+							<{$proposition.name}>&nbsp;
+							<font><{$proposition.create_time|date_format:'%Y-%m-%d'}></font>
+						</h5>
+						<div class="fqr">
+							<font><strong>发起人：</strong><{$proposition.username}></font>
+							<font><strong>提交期限：</strong><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></font>
+						</div>
+
+					    <div class="wfb_cont" style="display:none;line-height:30px;">
+                            <dl style="overflow:visible">
+                                <dt>任何内容</dt>
+                                <dd><font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font><div class="clear"></div></dd>
+                                <dd><font>学科：<{$proposition.subject}> </font><font>试卷满分：<{$proposition.score}></font><div class="clear"></div></dd>
+                                <dd><font>考试对象：<{$proposition.object}> </font><font>试卷难度：<{$proposition.difficulty}></font><div class="clear"></div></dd>
+                            </dl>
+                            <dl>
+                                <dt>相关人员</dt>
+                                <dd>考务组织人：<{if $proposition.organizers}><{sizeof(explode(',', $proposition.organizers))}>人（<{$proposition.organizers}>）<{else}>0人<{/if}></dd>
+                                <dd>试卷审核：<{if $proposition.auditors}><{sizeof(explode(',', $proposition.auditors))}>人（<{$proposition.auditors}>）<{else}>0人<{/if}></dd>
+                                <dd>命题教师：<{if $proposition.assign_teachers}><{sizeof(explode(',', $proposition.assign_teachers))}>人（<{$proposition.assign_teachers}>）<{else}>0人<{/if}></dd>
+                            </dl>
+                        </div>
+
+						<div class="width_cpico2_warp">
+                            <div class="width_fqic fl">
+                                <ol class="fq_ico_jl">
+                                    <li>发起</li>
+                                    <li>组织</li>
+                                    <li>命题</li>
+                                    <li>审核</li>
+                                    <li>结束</li>
+                                    <div class="clear"></div>
+                                </ol>
+
+                                <ol class="ico_cp ">
+                                    <{if $proposition.state>0}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                    <{if $proposition.state>0}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                    <{if $proposition.state>1}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                    <{if $proposition.state>2}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                    <{if $proposition.state>3}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                </ol>
+
+                                <ol class="time_cp fq_ico_jl">
+                                    <li><{$proposition.create_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                    <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                    <li><{$proposition.topic_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                    <li><{$proposition.audit_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                    <li><{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                </ol>
+                            </div>
+						
+							<div class="cl_btn fl" style="text-align:center;">
+								<{if $proposition.state<2}>
+								<p class="yellow_color" style="margin-left:0;">任务未处理</p>
+								<p>
+									<input style="background:#515151" onclick="location.href='index.php?c=proposition&amp;a=taskProcessing&amp;id=<{$proposition.id}>'" type="button" value="开始组织" class="btn_fqcp" />
+								</p>
+								<{elseif $proposition.state==2}>
+								<p style="color:#226726;">任务已发布。<br/>命题中...</p>
+								<{elseif $proposition.state==3}>
+								<p style="color:#226726;">任务已发布。<br/>审核中...</p>
+								<{else}>
+								<p style="color:#226726;">任务已完成</p>
+								<{/if}>
+							</div>
+                        </div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<{/foreach}>
+
+				<{foreach item=proposition from=$topicPropositions}>
+				<div class="wdrw_mt" style="background:#36718c">
+					<div class="fl mm_title"><span style="color:white">命题任务</span></div>
+					<div class="yfb fr rw_bgcolor">
+						<h5>
+							<a href="#" onclick="$(this).parents('.yfb').find('.wfb_cont').toggle();return false;">详情</a>
+							<{$proposition.name}>&nbsp;
+							<font><{$proposition.create_time|date_format:'%Y-%m-%d'}></font>
+						</h5>
+						<div class="fqr">
+							<font class="fl"><strong>发起人：</strong><{$proposition.username}></font>
+							<span class="fl"></span>
+							<font class="fl color_tm"><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></font>
+							<{if $proposition.proposition_state==2}>
+							<font class="topic_end_time sysj"><{$proposition.topic_time|date_format:'%Y/%m/%d'}></font>
+							<{/if}>
+							<div class="clear"></div>
+						</div>
+						<div class="wfb_cont" style="display:none">
+							<dl>
+								<dt>考试信息</dt>
+								<dd>
+									<font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font>
+									<div class="clear"></div>
+								</dd>
+								<dd>
+									<font>学科：<{$proposition.subject}> </font><font>难度要求：<{$proposition.difficulty}></font>
+									<div class="clear"></div>
+								</dd>
+								<dd>
+									<font>考试对象：<{$proposition.object}> </font>
+									<div class="clear"></div>
+								</dd>
+							</dl>
+							<dl>
+								<dt>任务内容</dt>
+								<dd>要求：<{$proposition.topic_type}> <{$proposition.count}>题</dd>
+								<dd class="fpadding_top">
+									知识点：
+									<{foreach item=knowledge_point from=explode(',', $proposition.proposition_teacher_item_knowledge_points)}>
+										<em><{$knowledge_point}></em>
+									<{/foreach}>
+								</dd>
+							</dl>
+						</div>
+
+						<div class="xk_cont fl">
+							<p>学科：<{$proposition.subject}></p>
+							<p>要求：<{$proposition.topic_type}><{$proposition.count}>道</p>
+							</ul>
+						</div>
+						<div class="fl jindutiao">
+							<div data-options="value:<{intval($proposition.assigned_count/$proposition.count*100)}>" class="easyui-progressbar" style="width: 298px;height: 15px;margin-top: 3px;"></div>
+							<p>
+								<font>已完成：<{$proposition.assigned_count}>道</font>
+								<span>未完成：<{$proposition.count-$proposition.assigned_count}>道 </span>
+							</p>
+						</div>
+                        
+						<div class="cl_btn fl">
+							<{if $proposition.proposition_state==2}>
+								<{if $proposition.proposition_teacher_item_state}>
+								<input name="" onclick="return false;" type="button" value="已完成"
+									class="btn_fqcp btn_wc" />
+								<{else}>
+								<p>
+									<input onclick="location.href='index.php?c=propositionTeacherItem&amp;a=aleadyTsk&amp;id=<{$proposition.proposition_teacher_item_id}>'"  name="" type="button" value="开始命题" class="btn_fqcp"  />
+								</p>
+								<{/if}>
+							<{elseif $proposition.proposition_state<2}>
+							<p style="color:#226726;">未开始</font>
+							<{else}>
+							<p style="color:#226726;">已完成</font>
+							<{/if}>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<{/foreach}>
+
+				<{foreach item=proposition from=$auditPropositions}>
+				<div class="wdrw_mt" style="background:#b23130">
+					<div class="fl mm_title padding_x"><span style="color:white">审核任务</span></div>
+					<div class="yfb fr rw_bgcolor">
+						<h5>
+							<a href="#" onclick="$(this).parents('.yfb').find('.wfb_cont').toggle();return false;">详情</a>
+							<{$proposition.name}>&nbsp;
+							<font><{$proposition.create_time|date_format:'%Y-%m-%d'}></font>
+						</h5>
+						<div class="fqr">
+							<font class="fl"><strong>发起人：</strong><{$proposition.username}></font><span class="fl"></span>
+							<font class="fl color_tm"><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></font>
+							<div class="cl_btn fl">
+								<{if $proposition.state==3}>
+								<{elseif $proposition.state<3}>
+								<p style="color:#226726;">未开始</font>
+								<{else}>
+								<p style="color:#226726;">已结束</font>
+								<{/if}>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="wfb_cont" <{if $proposition.state>3}>style="display:none"<{/if}>>
+							<dl>
+								<dt>考试信息</dt>
+								<dd>
+									<font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font>
+									<div class="clear"></div>
+								</dd>
+								<dd>
+									<font>学科：<{$proposition.subject}> </font><font>难度要求：<{$proposition.difficulty}></font>
+									<div class="clear"></div>
+								</dd>
+								<dd>
+									<font>考试对象：<{$proposition.object}> </font>
+									<div class="clear"></div>
+								</dd>
+							</dl>
+							<dl>
+								<dt class="fl">审核进度</dt>
+								<div class="fl">
+									<div data-options="value:<{intval($proposition.audited_count/$proposition.count*100)}>" class="easyui-progressbar" style="width: 298px;height: 15px;margin-top: 3px;margin-left: 10px;"></div>
+								</div>
+								<div class="fl jindutiao padding_02">
+									<p>
+										<font>已完成：<{$proposition.audited_count}>/<{$proposition.count}>道</font><span> 剩余：<{$proposition.count-$proposition.audited_count}>道 </span>
+									</p>
+								</div>
+								<div class="clear"></div>
+							</dl>
+							<dl>
+								<dt>考试信息</dt>
+								<table cellpadding="0" cellspacing="0" class="l_table" width="100%" style="border-collapse:collapse;">
+									<thead>
+										<tr>
+											<th>题型</th>
+											<th>题量</th>
+											<th width="200px">知识点</th>
+											<th>已审核</th>
+											<th>审核状态</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<{foreach item=teacherItem from=$proposition.teacherItems}>
+										<tr>
+											<td><{$teacherItem.topic_type}></td>
+											<td><{$teacherItem.count}></td>
+											<td><{$teacherItem.knowledge_points}></td>
+											<td><{$teacherItem.audited_count}></td>
+											<td><{if $teacherItem.state==2}>已完成<{else}>未完成<{/if}></td>
+											<td>
+												<{if $teacherItem.state==1 && $proposition.state==3}>
+												<a href="index.php?c=propositionTeacherItem&amp;a=reviewTask&amp;id=<{$teacherItem.id}>">开始审核</a>
+												<{/if}>
+											</td>
+										</tr>
+										<{/foreach}>
+									</tbody>
+								</table>
+							</dl>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<{/foreach}>
+			</div>
+			<div class="clear"></div>
+
+		</div>
+
+		<div class="clear"></div>
+
+
+

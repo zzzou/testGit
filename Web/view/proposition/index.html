@@ -1,0 +1,113 @@
+<link href="./css/lianb.css" rel="stylesheet" type="text/css" />
+
+<script  src="./js/proposition/situation_slip.js" type="text/javascript" ></script>
+
+<div class="epd_right_con" >
+    <div class="cont_box fr">
+        <h3><a href="index.php?c=proposition&a=create">新建命题任务</a>发起命题 </h3>
+        <div class="mtfb">
+          	<div class="fb_cont">
+                <h4>已发布</h4>
+                
+                <{foreach item=proposition from=$publishedPropositions}>
+                <div class="yfb" style="margin-bottom:20px;">
+                	<h5>
+                        <a href="#" onclick="$(this).parents('.yfb').find('.wfb_cont').toggle();return false;">详情</a>
+                        <{$proposition.name}> <font><{$proposition.create_time|date_format:'%Y-%m-%d'}></font>
+                    </h5>
+                   <div class="fqr">
+                        <font><strong >发起人：</strong><{$proposition.username}></font>
+                        <font><strong >提交期限：</strong><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></font>
+                    </div>
+                    <div class="width_cpico2_warp">
+                        <div class="width_fqic fl">
+                            <ol class="fq_ico_jl">
+                                <li>发起</li>
+                                <li>组织</li>
+                                <li>命题</li>
+                                <li>审核</li>
+                                <li>结束</li>
+                                <div class="clear"></div>
+                            </ol>
+                            <ol class="ico_cp ">
+                                <{if $proposition.state>0}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                <{if $proposition.state>0}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                <{if $proposition.state>1}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                <{if $proposition.state>2}><li class="ico_hover"></li><{else}><li></li><{/if}>
+                                <{if $proposition.state>3}><li class="ico_hover" ></li><{else}><li></li><{/if}>
+                            </ol>
+                            <ol class="time_cp fq_ico_jl">
+                                <li><{$proposition.create_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.topic_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.audit_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                                <li><{$proposition.organize_end_time|date_format:'%Y-%m-%d'}>&nbsp;</li>
+                            </ol>
+                        </div>
+                    </div>
+                   
+                    <div class="wfb_cont" style="display:none;line-height:30px;">
+                        <dl style="overflow:visible">
+                            <dt>任何内容</dt>
+                            <dd><font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font><div class="clear"></div></dd>
+                            <dd><font>学科：<{$proposition.subject}> </font><font>试卷满分：<{$proposition.score}></font><div class="clear"></div></dd>
+                            <dd><font>考试对象：<{$proposition.object}> </font><font>试卷难度：<{$proposition.difficulty}></font><div class="clear"></div></dd>
+                        </dl>
+                        <dl>
+                            <dt>相关人员</dt>
+                            <dd>考务组织人：<{if $proposition.organizers}><{sizeof(explode(',', $proposition.organizers))}>人（<{$proposition.organizers}>）<{else}>0人<{/if}></dd>
+                            <dd>试卷审核：<{if $proposition.auditors}><{sizeof(explode(',', $proposition.auditors))}>人（<{$proposition.auditors}>）<{else}>0人<{/if}></dd>
+                            <dd>命题教师：<{if $proposition.assign_teachers}><{sizeof(explode(',', $proposition.assign_teachers))}>人（<{$proposition.assign_teachers}>）<{else}>0人<{/if}></dd>
+                        </dl>
+                        <dl>
+                            <dt>提交期限</dt>
+                            <dd><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></dd>
+                        </dl>
+                    
+                    </div>
+                </div>
+                <{/foreach}>
+            </div>
+        </div>
+
+  		<div class="fb_cont">
+        	<h4  class="h4_color">未发布</h4>
+            <{foreach item=proposition from=$unpublishedPropositions}>
+            <div class="wfb" style="margin-bottom:20px;">
+            	<div class="wf_bg">
+                    <h5 class="fl"><{$proposition.name}> <font><{$proposition.create_time|date_format:'%Y-%m-%d'}></font></h5>
+                    <p>
+                        <em><a href="index.php?c=proposition&a=create&id=<{$proposition.id}>">编辑任务</a></em>
+                        <font>
+                            <a href="#" onclick="$(this).parents('.wfb').find('.wfb_cont').toggle();return false;">详细</a>
+                            <a onclick="return confirm('你确认删除吗？')" href="index.php?c=proposition&a=deleteTask&id=<{$proposition.id}>">删除</a>
+                        </font>
+                    </p>
+                    <div class="clear"></div>
+
+                    <div class="wfb_cont" style="display:none">
+                        <dl>
+                            <dt>任何内容</dt>
+                            <dd><font>学段：<{$proposition.study_section}></font> <font>考试类型：<{$proposition.type}></font><div class="clear"></div></dd>
+                            <dd><font>学科：<{$proposition.subject}> </font><font>试卷满分：<{$proposition.score}></font><div class="clear"></div></dd>
+                            <dd><font>考试对象：<{$proposition.object}> </font><font>试卷难度：<{$proposition.difficulty}></font><div class="clear"></div></dd>
+                        </dl>
+                        <dl>
+                            <dt>相关人员</dt>
+                            <dd>考务组织人：<{if $proposition.organizers}><{sizeof(explode(',', $proposition.organizers))}>人（<{$proposition.organizers}>）<{else}>0人<{/if}></dd>
+                            <dd>试卷审核：<{if $proposition.assign_teachers}><{sizeof(explode(',', $proposition.assign_teachers))}>人（<{$proposition.assign_teachers}>）<{else}>0人<{/if}></dd>
+                            <dd>命题教师：<{if $proposition.auditors}><{sizeof(explode(',', $proposition.auditors))}>人（<{$proposition.auditors}>）<{else}>0人<{/if}></dd>
+                        </dl>
+                        <dl>
+                            <dt>提交期限</dt>
+                            <dd><{$proposition.organize_start_time|date_format:'%Y-%m-%d'}>~<{$proposition.organize_end_time|date_format:'%Y-%m-%d'}></dd>
+                        </dl>
+                    
+                    </div>
+
+                </div>
+            </div>
+            <{/foreach}>
+        </div>
+    </div>
+</div>

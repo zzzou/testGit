@@ -1,0 +1,65 @@
+<style type="text/css">
+.gform .gformbox {
+float: left;
+width: 350px;
+margin-bottom: 10px;
+line-height: 27px;
+height: 27px;
+}
+</style>
+
+<div id="dlg_paper" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 0px; max-height: none; ">
+<form id="biaoDingScoreForm" method="post" class="gform" >
+    <div class="gformbox">
+        <label>
+            <span class="g1">总分:</span><span class="g2">
+                <input name="examMsg[total]" value="" class="ui-widget-content ui-corner-all">
+            </span>
+        </label>
+        <span class="btn avg" style="width: 70px; height: 22px; line-height: 22px;">平均分配</span>
+    </div>
+    <{foreach item=item from=$examMsg}>
+    <div class="gformbox">
+                <label>
+            <span class="g1">第<{$item.sort}>题:</span>
+            <span class="g2">
+                <input name="examMsg[<{$item.Id}>]" data-n="5" value="0.00" class="ui-widget-content ui-corner-all">
+            </span>
+        </label>
+    </div>
+    <{/foreach}>
+    <input type="hidden" name="CategoryId" value="<{$cateId}>">
+    <input type="hidden" name="examId" value="3868">
+</form>
+</div>
+
+<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+<div class="ui-dialog-buttonset">
+<button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+<span class="ui-button-text" id="biaoDingScoreBtn">确定</span>
+</button>
+</div>
+</div>
+
+
+<script type="text/javascript">
+  $(function(){
+	  
+	  $("#biaoDingScoreBtn").click(function(){
+		  
+		  $("#biaoDingScore").dialog( "close" );
+		  $('#biaoDingScoreForm').form('submit', {
+			  url:'index.php?c=paper&a=addNum',
+		      dataType:'text',
+		      success:function(data){
+		    	   var id=  $("[name=CategoryId]").val();
+		    	   var selectName ="[data-id='"+id+"'].question-handle-box";
+		    	  $(selectName).find('.change-inner-des').html(data);
+                  console.debug("标定成功");
+		       }		  
+		  });
+	  });
+	  
+  });
+
+</script>

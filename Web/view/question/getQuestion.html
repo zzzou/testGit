@@ -1,0 +1,80 @@
+<script src="./js/question/getQuestion.js" type="text/javascript"></script>
+<div class="papercontent">
+    <{if $ifhead eq '1'}>
+        <div style="margin-top: 10px; font-size: 20px; font-weight: bolder; color: #025AA1;">【卷号$!exam.paperId】$!exam.title</div>
+        <div style="font-weight: bold; margin-left: 10px; margin-top: 5px;">适用年级：<span style="color: #00f;">$!this.getDictByCate("grade","$!exam.gradeId").title</span> | 试卷类型：<span style="color: #00f;">$!this.getDictByCate("examtype","$!exam.typeId").title</span> | 适用省份：<span style="color: #00f;">$!this.getDictByCate("province","$!exam.ProvinceId").title</span> | 试卷年份：<span style="color: #00f;">$!exam.YearName</span> | 上传日期：<span>$!exam.DateCreated</span> | <span>题数：$!q.totalcount</span></div>
+        <input type="hidden" name="examId" value="$!exam.paperid" />
+    <{/if}>
+    <div style="background: #f7f7f7; border: 1px solid #cccccc; border-bottom: none; position: relative; height: 28px; line-height: 28px; margin-right: 1px;">
+        <{if $ifhead eq '2'}>
+            <div class="pg fl">
+                <a href="#" class="prev">&nbsp;</a> 第<b><{$pageIndex}></b>/<label id="pageCountId"><{$pageCount}></label>页 <a href="#" class="next">&nbsp;</a>
+                &nbsp;&nbsp;共<b style="color: red;"><{$count}></b>题
+            </div>
+        <{/if}>
+        <div style="float: right;">
+            <a href="#" class="color_title select_all" style="color: #fff;">本页全部加入</a>
+        </div>
+    </div>
+</div>
+	    
+<{foreach item=item from=$data}>
+    <div class="tiku" >
+        <div class="tiku_title">
+            <div class="common_title">
+                <span class="common_title_n">题号：<{$item.SourceId}> &nbsp;</span>
+                <span class="common_title_m">题型：<{$item.CategoryId}> &nbsp;</span>
+                <span class="common_title_m">难度：<{$item.DiffId}> &nbsp;</span>
+                <span class="common_title_m">日期：<{$item.DateCreated}> </span>
+                <span class="common_title_m">使用次数：<{$item.RefCount}></span>
+            </div>
+            <div class="common_title">
+                <span class="common_title_n">标题/来源：<{$item.PaperTitle}></span>
+            </div>
+            <div class="yichu" style="width: 140px;">
+	            <!-- 
+	                <span class='#if($!this.IsExistCart("$!item.CategoryId","$!item.Id"))remove#end'>
+	                    <a class="quesbar out" href="#" title="移出试题篮">移出试题篮</a>
+	                    <a class="quesbar in" href="#" title="加入试题篮">加入试题篮</a>
+	                </span>
+	                <span #if($!this.isExistCollection("$!item.id"))title="点击取消收藏" #else title="点击加入收藏" class="add"#end>
+	                    <a class="collection" href="#">&nbsp;</a>
+	                </span>
+	            -->
+                <span data='<{$item.Id}>'>
+                    <a class="quesbar out" href="#" title="移出试题篮"  data='<{$item.Id}>' >移出试题篮</a>
+                    <a class="quesbar in" href="#" title="加入试题篮"  data='<{$item.Id}>' >加入试题篮</a>
+                </span>
+                <{if $item.isQuote == "1"}>
+	                <span title="已引用到我的题库" class="add_add_c">
+	                    <a class="collection_yin ishove" href="#"></a>            
+	                 </span>
+                <{/if}>
+                <{if $item.isQuote == "0"}>
+                    <span title="引用到我的题库">
+                        <a class="collection_yin ishove" href="#" data='<{$item.SourceId}>' ></a>
+                    </span>
+                <{/if}>
+	                <!--  
+	                #if($!item.IsLesson==1)
+	                <span class="add_1">
+	                    <a class="weikes play" qid ="$!item.Id" href='#'>&nbsp;</a>
+	                    <%--<a class="play" href="#">&nbsp;</a>--%>
+	                </span>
+	                #end
+	                 <span#if($this.IsQuote("$!item.SourceId"))title="已引用到我的题库" class="add_add_c "  #else title="点击引用到我的题库"#end>
+	                    <a class="collection_yin" href="#"></a>
+	                </span>
+	                -->
+            </div>
+        </div>
+        <div class="tiku_content">
+            <img src="<{$item.BodyImg}>" />
+        </div>
+        <div class="answer hide">
+           <div><img src="<{$item.ParseImg}>" /></div>
+           <div><img src="<{$item.AnswerImg}>" /></div>
+        </div>
+    </div>
+<{/foreach}>
+<{include file="question/questionBasket.html"}>

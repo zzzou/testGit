@@ -1,0 +1,39 @@
+[ 
+  { "BankId" : 10,
+    "Id" : 12078,
+    "SourceId" : 12078,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文鲁教版",
+     "selected":true
+  },
+  { "BankId" : 10,
+    "Id" : 12151,
+    "SourceId" : 12151,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文人教版"
+  },
+  { "BankId" : 10,
+    "Id" : 12267,
+    "SourceId" : 12267,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文苏教版"
+  },
+  { "BankId" : 10,
+    "Id" : 12406,
+    "SourceId" : 12406,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文新课标版"
+  },
+  { "BankId" : 10,
+    "Id" : 12545,
+    "SourceId" : 12545,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文语文版"
+  },
+  { "BankId" : 10,
+    "Id" : 12687,
+    "SourceId" : 12687,
+    "TableName" : "bank_Category",
+    "Title" : "高中语文粤教版"
+  }
+]

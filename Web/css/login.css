@@ -1,0 +1,354 @@
+.ea_head {
+    height: 67px;
+    background: #3365a8;
+}
+
+.ea_headcon {
+    width: 995px;
+    height: 67px;
+    background: url(../images/ea_dlcLOGOBg.png) no-repeat right top;
+    margin: 0 auto;
+    padding: 0 0 0 5px;
+}
+
+.ea_logo {
+    display: inline;
+    float: left;
+}
+
+.ealog_bg {
+    background: url(../images/ea_logbg.png) no-repeat top center;
+    height: 380px;
+}
+
+.ealog_main {
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 11px;
+}
+
+.ealog_con {
+    float: right;
+    display: inline;
+    background: url(../images/ea_logform.png) no-repeat;
+    width: 351px;
+    height: 303px;
+    padding-top: 70px;
+    _background-image: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/ea_logform.png", sizingMethod="scale");
+}
+
+.ea_dlred {
+    color: red;
+    width: 263px;
+    height: 25px;
+    line-height: 22px;
+    overflow:hidden;
+    margin: 0 auto;
+}
+
+.ea_dl {
+    margin-left: 30px;
+    width: 263px;
+    margin: 0 auto 15px auto;
+    height: 40px;
+    position: relative; /*140115--add---*/
+
+}
+
+.ea_dlInput {
+    background: url(../images/ea_dlBgc.png) no-repeat scroll 0 0;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #888;
+    border: none;
+    width: 237px;
+    height: 18px;
+    padding: 11px 13px;
+}
+
+.ea_dlcap {
+    width: 263px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.ea_dlcode {
+    width: 73px;
+    height: 18px;
+    border: none;
+    background: url(../images/ea_dlcap.png) no-repeat scroll 0 0;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #888;
+    padding: 11px 15px;
+    float: left;
+}
+
+.ea_dlcodeImg {
+    width: 101px;
+    height: 36px;
+    background: url(../images/ea_dlcapcode.png) no-repeat scroll 0 0;
+    display: inline-block;
+    float: left;
+    margin: 2px 0 0 10px;
+}
+
+.ea_dlcap a {
+    color: #3366ff;
+    margin: 0 0 0 6px;
+    line-height: 36px;
+}
+
+.ea_dlcap a:hover {
+    color: #3366ff;
+    text-decoration: underline;
+}
+
+.ealog_btn {
+    width: 351px;
+    float: left;
+    margin-top: 10px;
+}
+
+.ealo_btn, .ealo_btnhov {
+    float: left;
+    display: block;
+    margin-left: 46px;
+    background: url(../images/ea_logbtn.png) no-repeat 0 0;
+    width: 212px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+}
+
+.ealog_btn .ealo_btnhov {
+    background-position: 0 -40px;
+    cursor: pointer;
+    border: none;
+}
+.forgetpwd{
+    float:left;
+    position:relative;
+}
+
+.forgetpwd a {
+    display: inline;
+    color: #ff9000;
+    line-height: 22px;
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+}
+
+.forgetpwd a:hover {
+    text-decoration: underline;
+}
+.tips_closed{
+    display:inline;
+    position:absolute;
+    top:-30px;
+    left:170px;
+}
+.tips_closed:hover{
+    text-decoration:none!important;
+}
+.forgetpwd p{
+    width:270px;
+    height:40px;
+    padding:10px 0 0 0;
+    line-height:20px;
+    overflow:hidden;
+    position:absolute;
+    left:-212px;
+    top:40px;
+    color:#666;
+}
+.ea_newsModel {
+    margin: 40px auto 0 auto;
+    width: 992px;
+    padding: 0 8px 0 0;
+    height: 196px;
+}
+
+.ea_newsModelCon {
+    float: left;
+    width: 310px;
+    margin: 0 30px 0 0;
+}
+
+.ea_newsModelTit {
+    height: 41px;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 41px;
+    border-top: 2px solid #df7d66;
+}
+
+.ea_newsModelNote {
+    float: left;
+    color: #666;
+    font-weight: bold;
+    font-size: 14px;
+    border-left: 3px solid #df7d66;
+    text-indent: 6px;
+    height: 18px;
+    margin: 12px 0 0 0;
+    line-height: 18px;
+}
+
+.ea_newsModelMore {
+    float: right;
+}
+
+.ea_newsModelMore a {
+    color: #999;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ea_newsModelConp {
+    color: #585858;
+}
+
+.ea_newsModelConp ul {
+    padding: 9px 0 0 0;
+}
+
+.ea_newsModelConp ul li {
+    text-indent: 23px;
+    background: url(../images/ea_newsModelTime.png) no-repeat scroll 8px center;
+    line-height: 26px;
+    overflow: hidden;
+}
+
+.ea_newsModelTime {
+    float: right;
+    margin: 0 10px 0 0;
+}
+
+.ea_newsModelConCen {
+    float: left;
+    width: 310px;
+    margin: 0 30px 0 0;
+}
+
+.ea_newsModelTitCen {
+    height: 41px;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 41px;
+    border-top: 2px solid #8bb343;
+}
+
+.ea_newsModelNoteCen {
+    float: left;
+    color: #666;
+    font-weight: bold;
+    font-size: 14px;
+    border-left: 3px solid #8bb343;
+    text-indent: 6px;
+    height: 18px;
+    margin: 12px 0 0 0;
+    line-height: 18px;
+}
+
+.ea_newsModelMore {
+    float: right;
+}
+
+.ea_newsModelMore a {
+    color: #999;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ea_newsModelConp {
+    color: #585858;
+}
+
+.ea_newsModelTime {
+    float: right;
+    margin: 0 10px 0 0;
+}
+
+.ea_newsModelConLast {
+    float: right;
+    width: 310px;
+    margin: 0;
+}
+
+.ea_newsModelTitLast {
+    height: 41px;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 41px;
+    border-top: 2px solid #60afe2;
+}
+
+.ea_newsModelNoteLast {
+    float: left;
+    color: #666;
+    font-weight: bold;
+    font-size: 14px;
+    border-left: 3px solid #60afe2;
+    text-indent: 6px;
+    height: 18px;
+    margin: 12px 0 0 0;
+    line-height: 18px;
+}
+
+.ea_newsModelMore {
+    float: right;
+}
+
+.ea_newsModelMore a {
+    color: #999;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ea_newsModelConp {
+    color: #585858;
+}
+
+.ea_foot2 {
+    width: 978px;
+    text-align: center;
+    font-size: 16px; /*140107*/
+    margin: 42px auto;
+}
+
+/* -----------------------------------
+ 首页登录框placehover效果样式文件*/
+.login_form input.input-text {
+    position: relative;
+    z-index: 1;
+}
+
+.login_form label {
+    position: absolute;
+    z-index: 2;
+}
+
+.login_form label.inlined {
+    display: block;
+    padding-left: 6px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #4d4d4d;
+    opacity: 0.75;
+    transition: opacity .15s linear;
+    left: .45em;
+    top: .55em;
+    cursor: text;
+}
+
+.login_form label.focus {
+    opacity: 0.35;
+}
+
+.login_form label.has-text {
+    opacity: 0.0;
+    transition-duration: 0s;
+}
+
+/* 首页登录框placehover效果样式文件
+ -----------------------------------*/
